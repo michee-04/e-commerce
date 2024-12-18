@@ -1,0 +1,59 @@
+services:
+  app:
+    build: .
+    container_name: e-commerce
+    ports:
+      - '${PORT}:${PORT}'
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+      - redis
+      - minio
+      - maildev
+    volumes:
+      - .:/usr/src/app
+
+  mongo:
+    image: mongo
+    container_name: e-commerce-mongo
+    ports:
+      - '${DB_CLIENT_PORT}:${DB_PORT}'
+    volumes:
+      - mongo-data:/data/db
+
+  redis:
+    image: redis:latest
+    container_name: e-commerce-redis
+    ports:
+      - '${REDIS_EXT_PORT}:${REDIS_PORT}'
+
+  minio:
+    image: minio/minio
+    container_name: e-commerce-minio
+    command: server /data --console-address ":${MINIO_CONSOLE_PORT}"
+    ports:
+      - '${MINIO_EXT_API_PORT}:${MINIO_API_PORT}'
+      - '${MINIO_EXT_CONSOLE_PORT}:${MINIO_CONSOLE_PORT}'
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+    volumes:
+      - minio-data:/data
+
+  maildev:
+    image: maildev/maildev
+    container_name: e-commerce-maildev
+    ports:
+      - '${MAILDEV_EXT_PORT}:${MAILDEV_PORT}'
+      - '${MAILDEV_EXT_WEBAPP_PORT}:${MAILDEV_WEBAPP_PORT}'
+    healthcheck:
+      test:
+        ['CMD', 'wget', '--spider', 'http://localhost:${MAILDEV_WEBAPP_PORT}']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  mongo-data:
+  minio-data:
