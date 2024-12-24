@@ -11,6 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the rest of the application
+COPY ./src/templates /usr/src/app/src/templates
 COPY . .
 
 # Build the TypeScript project
