@@ -11,7 +11,6 @@ const promotionsSchema = createBaseSchema<IPromotionsModel>(
     productId: {
       type: Schema.Types.ObjectId,
       ref: PRODUCT_MODEL_NAME,
-      unique: true,
       required: true,
     },
     discountPourcentage: {

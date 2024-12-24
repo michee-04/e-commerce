@@ -12,10 +12,12 @@ const wishlistsSchema = createBaseSchema<IWishlistsModel>(
     userId: {
       type: Schema.Types.ObjectId,
       ref: USER_MODEL_NAME,
+      required: true,
     },
     productId: {
       type: Schema.Types.ObjectId,
       ref: PRODUCT_MODEL_NAME,
+      required: true,
     },
   },
   {

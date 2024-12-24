@@ -11,6 +11,7 @@ const productImageSchema = createBaseSchema<IProductImageModel>(
     productId: {
       type: Schema.Types.ObjectId,
       ref: PRODUCT_MODEL_NAME,
+      required: true,
     },
     imageUrl: {
       type: String,
