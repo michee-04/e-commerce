@@ -78,6 +78,9 @@ export interface Config {
     stores?: Array<string>;
     defaultStore: string;
   };
+  templateUrl: {
+    welcomeAccount: string;
+  };
 }
 
 export class ConfigService {
@@ -232,6 +235,10 @@ export class ConfigService {
       fs: {
         stores: process.env.FILE_STORES?.split(','),
         defaultStore: process.env.FILE_STORAGE || 'disk',
+      },
+      templateUrl: {
+        welcomeAccount:
+          process.env.WELCOME_ACCOUNT || 'src/app/src/templates/mail',
       },
     };
   }
