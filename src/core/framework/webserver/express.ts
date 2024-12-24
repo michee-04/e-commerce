@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
-import { AppModule } from 'modules';
+import { GlobalErrorHandler, NotFoundHandler } from '@nodesandbox/response-kit';
+import { helmetCSPConfig } from 'core/constants';
 import {
   initializeSessionAndFlash,
   initializeViewEngine,
 } from 'core/framework';
-import { helmetCSPConfig } from 'core/constants';
-import { GlobalErrorHandler, NotFoundHandler } from '@nodesandbox/response-kit';
+import { AppModule } from 'modules';
 
 const app = express();
 const AllRoutes = AppModule.getRouter();
@@ -40,7 +40,7 @@ initializeSessionAndFlash;
 initializeViewEngine;
 
 // Client authentication middleware
-app.use(AuthMiddlewares.enableClientAuth);
+// app.use(AuthMiddlewares.enableClientAuth);
 
 // Client authentication middleware
 app.use(SharedMiddlewares.enableRateLimiter);
