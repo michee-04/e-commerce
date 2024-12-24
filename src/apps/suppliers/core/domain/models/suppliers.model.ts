@@ -20,6 +20,7 @@ const suppliersSchema = createBaseSchema<ISuppliersModel>(
     addressId: {
       type: Schema.Types.ObjectId,
       ref: ADDRESS_MODEL_NAME,
+      required: true,
     },
   },
   {
