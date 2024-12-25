@@ -118,9 +118,10 @@ class AuthService {
   }
 
   async generateLoginOtp(
-    email: string,
+    payload: any,
   ): Promise<SuccessResponseType<IOTPModel> | ErrorResponseType> {
     try {
+      const { email } = payload;
       const userResponse = (await UserService.findOne({
         email,
       })) as any;
@@ -330,9 +331,10 @@ class AuthService {
   }
 
   async refresh(
-    refreshToken: string,
+    payload: any,
   ): Promise<SuccessResponseType<any> | ErrorResponseType> {
     try {
+      const { refreshToken } = payload;
       if (!refreshToken) {
         throw new ErrorResponse({
           code: 'BAD_REQUEST',
@@ -369,10 +371,11 @@ class AuthService {
   }
 
   async logout(
-    accessToken: string,
-    refreshToken: string,
+    payload: any,
   ): Promise<SuccessResponseType<null> | ErrorResponseType> {
     try {
+      const { accessToken, refreshToken } = payload;
+
       if (!refreshToken || !accessToken) {
         throw new ErrorResponse({
           code: 'BAD_REQUEST',
@@ -417,9 +420,10 @@ class AuthService {
   }
 
   async forgotPassword(
-    email: string,
+    payload: any,
   ): Promise<SuccessResponseType<null> | ErrorResponseType> {
     try {
+      const { email } = payload;
       if (!email) {
         throw new ErrorResponse({
           code: 'BAD_REQUEST',
@@ -488,7 +492,6 @@ class AuthService {
     try {
       // We suppose a verification about new password and confirmation password have already been done
       const { email, code, newPassword } = payload;
-
       const userResponse = (await UserService.findOne({
         email,
       })) as any;

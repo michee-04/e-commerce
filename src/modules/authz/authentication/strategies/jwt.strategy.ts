@@ -1,6 +1,6 @@
-import JWT, { SignOptions } from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
 import { ApiResponse, ErrorResponse } from '@nodesandbox/response-kit';
+import { NextFunction, Request, Response } from 'express';
+import JWT, { SignOptions } from 'jsonwebtoken';
 
 class JwtStrategy {
   private static instance: JwtStrategy;
