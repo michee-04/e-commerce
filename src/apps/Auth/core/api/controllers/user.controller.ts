@@ -7,8 +7,14 @@ import { NextFunction, Request, Response } from 'express';
 import { extractResponseData, sanitize } from 'helpers';
 import { AuthService } from 'modules/authz/authentication/services';
 import {
+  createGenerateLoginOtpDto,
+  createLoginWithOtpDto,
   createUserRequestDto,
   createVerifyAccountDto,
+  forgotPasswordDto,
+  logoutDto,
+  refreshTokenDto,
+  resetPasswordDto,
   userResponseDto,
 } from '../dtos';
 
@@ -48,6 +54,11 @@ class UserController {
   ): Promise<void> {
     try {
       const _payload = sanitize(req.body, createVerifyAccountDto);
+
+      if (!_payload.success) {
+        throw _payload.error;
+      }
+
       const response = await AuthService.verifyAccount(_payload.data);
       if (response.success) {
         ApiResponse.success(res, response);
@@ -82,7 +93,12 @@ class UserController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const response = await AuthService.generateLoginOtp(req.body.email);
+      const _payload = sanitize(req.body, createGenerateLoginOtpDto);
+      if (!_payload.success) {
+        throw _payload.error;
+      }
+
+      const response = await AuthService.generateLoginOtp(_payload.data);
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
@@ -99,6 +115,11 @@ class UserController {
     next: NextFunction,
   ): Promise<void> {
     try {
+      const _payload = sanitize(req.body, createLoginWithOtpDto);
+      if (!_payload.success) {
+        throw _payload.error;
+      }
+
       const response = await AuthService.loginWithOtp(req.body);
       if (response.success) {
         ApiResponse.success(res, response);
@@ -116,7 +137,13 @@ class UserController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const response = await AuthService.refresh(req.body.refreshToken);
+      const _payload = sanitize(req.body, refreshTokenDto);
+
+      if (!_payload.success) {
+        throw _payload.error;
+      }
+
+      const response = await AuthService.refresh(_payload.data);
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
@@ -133,8 +160,11 @@ class UserController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const { accessToken, refreshToken } = req.body;
-      const response = await AuthService.logout(accessToken, refreshToken);
+      const _payload = sanitize(req.body, logoutDto);
+      if (!_payload.success) {
+        throw _payload.error;
+      }
+      const response = await AuthService.logout(_payload.data);
       if (response.success) {
         ApiResponse.success(res, response, 202);
       } else {
@@ -151,7 +181,11 @@ class UserController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const response = await AuthService.forgotPassword(req.body.email);
+      const _payload = sanitize(req.body, forgotPasswordDto);
+      if (!_payload.success) {
+        throw _payload.error;
+      }
+      const response = await AuthService.forgotPassword(_payload.data);
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
@@ -168,7 +202,13 @@ class UserController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const response = await AuthService.resetPassword(req.body);
+      const _payload = sanitize(req.body, resetPasswordDto);
+
+      if (!_payload.success) {
+        throw _payload.error;
+      }
+
+      const response = await AuthService.resetPassword(_payload.data);
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
