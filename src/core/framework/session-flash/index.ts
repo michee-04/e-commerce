@@ -1,6 +1,7 @@
+import flash from 'connect-flash';
+import { passportInstance } from 'core/config/google.config';
 import { Application } from 'express';
 import session from 'express-session';
-import flash from 'connect-flash';
 
 export const initializeSessionAndFlash = (app: Application = APP): void => {
   app.use(
@@ -11,5 +12,8 @@ export const initializeSessionAndFlash = (app: Application = APP): void => {
       cookie: { secure: CONFIG.runningProd },
     }),
   );
+
   app.use(flash());
+  app.use(passportInstance.initialize());
+  app.use(passportInstance.session());
 };

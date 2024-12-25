@@ -34,7 +34,7 @@ app.use(express.json());
 app.disable('x-powered-by'); // or helmet.hidePoweredBy()
 
 // Initialize Session and Flash
-initializeSessionAndFlash;
+initializeSessionAndFlash(app);
 
 // Set view engine
 initializeViewEngine;
