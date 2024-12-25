@@ -45,3 +45,22 @@ export const createResetPassword: ObjectSchema = Joi.object({
   code: Joi.string().required(),
   newPassword: Joi.string().required(),
 });
+
+export const refreshTokenDto: ObjectSchema = Joi.object({
+  refreshToken: Joi.string().required(),
+});
+
+export const logoutDto = Joi.object({
+  accessToken: Joi.string().required(),
+  refreshToken: Joi.string().required(),
+});
+
+export const forgotPasswordDto = Joi.object({
+  email: Joi.string().email().required(),
+});
+
+export const resetPasswordDto = Joi.object({
+  email: Joi.string().email().required(),
+  code: Joi.string().required(),
+  newPassword: Joi.string().min(8).required(),
+});
