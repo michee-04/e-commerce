@@ -1,9 +1,8 @@
 import { BaseService } from '@nodesandbox/repo-framework';
 import {
-  ErrorResponse,
   ErrorResponseType,
   SuccessResponseType,
-} from '@nodesandbox/response-kit';
+} from '@nodesandbox/repo-framework/dist/handlers';
 import { PasswordUtils } from 'helpers';
 import { UserModel } from '../models';
 import { UserRepository } from '../repositories';
@@ -17,11 +16,11 @@ class UserService extends BaseService<IUserModel, UserRepository> {
         allowedFields: ['verified', 'active'],
         defaultSort: { createdAt: -1 },
       },
-      slug: {
-        enabled: true,
-        sourceField: 'title',
-        targetField: 'slugger',
-      },
+      // slug: {
+      //   enabled: true,
+      //   sourceField: 'title',
+      //   targetField: 'slugger',
+      // },
       search: {
         enabled: true,
         fields: ['firstname', 'lastname', 'email'],
@@ -38,30 +37,24 @@ class UserService extends BaseService<IUserModel, UserRepository> {
     try {
       const response = (await this.findOne({
         _id: userId,
-      })) as SuccessResponseType<IUserModel>;
+      })) as any;
 
-      if (!response.success || !response.document) {
+      if (!response.success || !response?.data?.docs) {
         LOGGER.error('Error password check', response);
         throw response.error;
       }
 
-      const userPassword = response.document.password;
+      const userPassword = response.data.docs.password;
       const isValid = await PasswordUtils.comparePassword(
         password,
         userPassword,
       );
 
-      return { success: true, document: { isValid } };
+      return { success: true, data: { isValid } };
     } catch (error) {
       return {
         success: false,
-        error:
-          error instanceof ErrorResponse
-            ? error
-            : new ErrorResponse(
-                'INTERNAL SERVER ERROR',
-                (error as Error).message,
-              ),
+        error: error as any,
       };
     }
   }
@@ -71,21 +64,21 @@ class UserService extends BaseService<IUserModel, UserRepository> {
     newPassword: string,
   ): Promise<SuccessResponseType<IUserModel> | ErrorResponseType> {
     try {
-      const response = (await this.findOne({
+      const response = await this.findOne({
         _id: userId,
-      })) as SuccessResponseType<IUserModel>;
+      });
 
-      if (!response.success || !response.document) {
+      if (!response.success || !response.data?.docs) {
         LOGGER.error('Error password update', response);
         throw response.error;
       }
 
       const hashedPassword = await PasswordUtils.hashPassword(newPassword);
 
-      const updateResponse = (await this.update(
+      const updateResponse = await this.update(
         { _id: userId },
         { password: hashedPassword },
-      )) as SuccessResponseType<IUserModel>;
+      );
 
       if (!updateResponse.success) {
         throw updateResponse.error;
@@ -93,18 +86,12 @@ class UserService extends BaseService<IUserModel, UserRepository> {
 
       return {
         success: true,
-        document: updateResponse.document,
+        data: updateResponse.data?.docs,
       };
     } catch (error) {
       return {
         success: false,
-        error:
-          error instanceof ErrorResponse
-            ? error
-            : new ErrorResponse(
-                'INTERNAL SERVER ERROR',
-                (error as Error).message,
-              ),
+        error: error as any,
       };
     }
   }
@@ -115,25 +102,20 @@ class UserService extends BaseService<IUserModel, UserRepository> {
     try {
       const response = (await this.findOne({
         email,
-      })) as SuccessResponseType<IUserModel>;
-      if (!response.success || !response.document) {
+      })) as any;
+
+      if (!response.success || !response.data?.docs) {
         throw response.error;
       }
 
       return {
         success: true,
-        document: { verified: response.document.verified },
+        data: { verified: response.data.docs.verified },
       };
     } catch (error) {
       return {
         success: false,
-        error:
-          error instanceof ErrorResponse
-            ? error
-            : new ErrorResponse(
-                'INTERVAL_SERVER_ERROR',
-                (error as Error).message,
-              ),
+        error: error as any,
       };
     }
   }
@@ -144,13 +126,13 @@ class UserService extends BaseService<IUserModel, UserRepository> {
     try {
       const response = (await this.findOne({
         email,
-      })) as SuccessResponseType<IUserModel>;
-      if (!response.success || !response.document) {
+      })) as any;
+      if (!response.success) {
         throw response.error;
       }
 
       const updateResponse = (await this.update(
-        { _id: response.document._id },
+        { _id: response.data.docs._id },
         { verified: true },
       )) as SuccessResponseType<IUserModel>;
 
@@ -160,15 +142,12 @@ class UserService extends BaseService<IUserModel, UserRepository> {
 
       return {
         success: true,
-        document: updateResponse.document,
+        data: updateResponse.data?.docs,
       };
     } catch (error) {
       return {
         success: false,
-        error:
-          error instanceof ErrorResponse
-            ? error
-            : new ErrorResponse('UNKNOWN_ERROR', (error as Error).message),
+        error: error as any,
       };
     }
   }

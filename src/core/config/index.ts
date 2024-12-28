@@ -19,6 +19,11 @@ export interface Config {
     refreshTokenExpireTime: string;
     tokenIssuer: string;
   };
+  google: {
+    callbackUrl: string;
+    clientId: string;
+    secretClient: string;
+  };
   rate: {
     limit: number;
     max: number;
@@ -78,6 +83,9 @@ export interface Config {
     stores?: Array<string>;
     defaultStore: string;
   };
+  templateUrl: {
+    welcomeAccount: string;
+  };
 }
 
 export class ConfigService {
@@ -101,6 +109,11 @@ export class ConfigService {
         accessTokenExpireTime: process.env.ACCESS_TOKEN_EXPIRE_TIME || '1h',
         refreshTokenExpireTime: process.env.REFRESH_TOKEN_EXPIRE_TIME || '7d',
         tokenIssuer: process.env.TOKEN_ISSUER || 'your-issuer',
+      },
+      google: {
+        callbackUrl: process.env.GOOGLE_CALLBACK_URL || '',
+        clientId: process.env.GOOGLE_CLIENT_ID || '',
+        secretClient: process.env.GOOGLE_SECRET_CLIENT || '',
       },
       rate: {
         limit: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10), // 15 minutes in milliseconds
@@ -232,6 +245,10 @@ export class ConfigService {
       fs: {
         stores: process.env.FILE_STORES?.split(','),
         defaultStore: process.env.FILE_STORAGE || 'disk',
+      },
+      templateUrl: {
+        welcomeAccount:
+          process.env.WELCOME_ACCOUNT || 'src/app/src/templates/mail',
       },
     };
   }

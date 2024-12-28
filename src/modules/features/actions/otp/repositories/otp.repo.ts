@@ -1,7 +1,7 @@
-import { Model } from 'mongoose';
 import { BaseRepository } from '@nodesandbox/repo-framework';
-import { IOTPModel, TOTPPurpose } from '../types';
 import { generateRandomCode } from 'helpers';
+import { Model } from 'mongoose';
+import { IOTPModel, TOTPPurpose } from '../types';
 
 export class OTPRepository extends BaseRepository<IOTPModel> {
   constructor(model: Model<IOTPModel>) {
@@ -47,7 +47,7 @@ export class OTPRepository extends BaseRepository<IOTPModel> {
   }
 
   async invalidateOldCodes(user: string, purpose: TOTPPurpose): Promise<void> {
-    /* TODO: Create a updateMany method or adapt the current update to be able to use it 
+    /* TODO: Create a updateMany method or adapt the current update to be able to use it
     here instead of calling the model */
     await this.model
       .updateMany({ user, used: false, purpose }, { $set: { isFresh: false } })
