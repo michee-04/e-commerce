@@ -1,4 +1,4 @@
-import { authenticate, clientAuthentication } from './middlewares';
+import { adminAuthentication, authenticate } from './middlewares';
 import { AuthService } from './services';
 
 export const AuthenticationModule = {
@@ -7,6 +7,6 @@ export const AuthenticationModule = {
   },
   middlewares: {
     authenticate,
-    enableClientAuth: clientAuthentication,
+    enableAdminAuth: adminAuthentication,
   },
 };
