@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  ApiResponse,
   ErrorResponse,
   ErrorResponseType,
 } from '@nodesandbox/repo-framework/dist/handlers';
+import { ApiResponse } from '@nodesandbox/response-kit';
 import { NextFunction, Request, Response } from 'express';
 import { extractResponseData, sanitize } from 'helpers';
 import { AuthService } from 'modules/authz/authentication/services';
 import {
+  adminRequestDto,
   createGenerateLoginOtpDto,
   createLoginWithOtpDto,
+  createLoginWithPasswordDto,
   createUserRequestDto,
   createVerifyAccountDto,
   forgotPasswordDto,
@@ -19,10 +21,16 @@ import {
   userResponseDto,
 } from '../dtos';
 
-class UserController {
-  static async register(req: Request, res: Response, next: NextFunction) {
+class AdminController {
+  static async registerAdmin(req: Request, res: Response, next: NextFunction) {
     try {
-      const _payload = sanitize(req.body, createUserRequestDto);
+      const _payload = sanitize(req.body, adminRequestDto);
+      // console.log('⚡⚡⚡⚡⚡⚡⚡ : ', _payload);
+
+      if (!_payload.success) {
+        throw _payload.error;
+      }
+
       const response = await AuthService.register(_payload.data);
 
       if (!response.success) {
@@ -32,7 +40,7 @@ class UserController {
       const responseData = sanitize(
         extractResponseData(userResponseDto, response?.data?.user),
         userResponseDto,
-      );
+      ) as any;
 
       if (!responseData.success) {
         throw responseData.error;
@@ -52,12 +60,17 @@ class UserController {
           },
         });
       }
+      console.log('⚡⚡⚡⚡⚡⚡ : ', error);
 
       ApiResponse.error(res, error as any);
     }
   }
 
-  static async verifyAccount(req: Request, res: Response, next: NextFunction) {
+  static async verifyAccountAdmin(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
     try {
       const _payload = sanitize(req.body, createVerifyAccountDto);
 
@@ -65,13 +78,14 @@ class UserController {
         throw _payload.error;
       }
 
-      const response = await AuthService.verifyAccount(_payload.data);
+      const response = (await AuthService.verifyAccount(_payload.data)) as any;
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
         throw response;
       }
     } catch (error) {
+      // TODO: Modification of the repo-framework package for better error handling
       if (error instanceof ErrorResponse) {
         const { code, statusCode, message, suggestions } = error;
 
@@ -83,6 +97,7 @@ class UserController {
           },
         });
       }
+      console.log('⚡⚡⚡⚡⚡⚡ : ', error);
 
       ApiResponse.error(res, error as any);
     }
@@ -94,13 +109,18 @@ class UserController {
     next: NextFunction,
   ) {
     try {
-      const response = await AuthService.loginWithPassword(req.body);
+      const _payload = sanitize(req.body, createLoginWithPasswordDto);
+      if (!_payload.success) {
+        throw _payload.error;
+      }
+      const response = (await AuthService.loginWithPassword(req.body)) as any;
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
         throw response;
       }
     } catch (error) {
+      // TODO: Modification of the repo-framework package for better error handling
       if (error instanceof ErrorResponse) {
         const { code, statusCode, message, suggestions } = error;
 
@@ -112,6 +132,7 @@ class UserController {
           },
         });
       }
+      console.log('⚡⚡⚡⚡⚡⚡ : ', error);
 
       ApiResponse.error(res, error as any);
     }
@@ -128,13 +149,16 @@ class UserController {
         throw _payload.error;
       }
 
-      const response = await AuthService.generateLoginOtp(_payload.data);
+      const response = (await AuthService.generateLoginOtp(
+        _payload.data,
+      )) as any;
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
         throw response;
       }
     } catch (error) {
+      // TODO: Modification of the repo-framework package for better error handling
       if (error instanceof ErrorResponse) {
         const { code, statusCode, message, suggestions } = error;
 
@@ -146,6 +170,7 @@ class UserController {
           },
         });
       }
+      console.log('⚡⚡⚡⚡⚡⚡ : ', error);
 
       ApiResponse.error(res, error as any);
     }
@@ -158,13 +183,14 @@ class UserController {
         throw _payload.error;
       }
 
-      const response = await AuthService.loginWithOtp(req.body);
+      const response = (await AuthService.loginWithOtp(req.body)) as any;
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
         throw response;
       }
     } catch (error) {
+      // TODO: Modification of the repo-framework package for better error handling
       if (error instanceof ErrorResponse) {
         const { code, statusCode, message, suggestions } = error;
 
@@ -176,6 +202,7 @@ class UserController {
           },
         });
       }
+      console.log('⚡⚡⚡⚡⚡⚡ : ', error);
 
       ApiResponse.error(res, error as any);
     }
@@ -189,13 +216,14 @@ class UserController {
         throw _payload.error;
       }
 
-      const response = await AuthService.refresh(_payload.data);
+      const response = (await AuthService.refresh(_payload.data)) as any;
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
         throw response;
       }
     } catch (error) {
+      // TODO: Modification of the repo-framework package for better error handling
       if (error instanceof ErrorResponse) {
         const { code, statusCode, message, suggestions } = error;
 
@@ -207,6 +235,7 @@ class UserController {
           },
         });
       }
+      console.log('⚡⚡⚡⚡⚡⚡ : ', error);
 
       ApiResponse.error(res, error as any);
     }
@@ -218,13 +247,14 @@ class UserController {
       if (!_payload.success) {
         throw _payload.error;
       }
-      const response = await AuthService.logout(_payload.data);
+      const response = (await AuthService.logout(_payload.data)) as any;
       if (response.success) {
         ApiResponse.success(res, response, 202);
       } else {
         throw response;
       }
     } catch (error) {
+      // TODO: Modification of the repo-framework package for better error handling
       if (error instanceof ErrorResponse) {
         const { code, statusCode, message, suggestions } = error;
 
@@ -236,6 +266,7 @@ class UserController {
           },
         });
       }
+      console.log('⚡⚡⚡⚡⚡⚡ : ', error);
 
       ApiResponse.error(res, error as any);
     }
@@ -247,13 +278,14 @@ class UserController {
       if (!_payload.success) {
         throw _payload.error;
       }
-      const response = await AuthService.forgotPassword(_payload.data);
+      const response = (await AuthService.forgotPassword(_payload.data)) as any;
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
         throw response;
       }
     } catch (error) {
+      // TODO: Modification of the repo-framework package for better error handling
       if (error instanceof ErrorResponse) {
         const { code, statusCode, message, suggestions } = error;
 
@@ -265,6 +297,7 @@ class UserController {
           },
         });
       }
+      console.log('⚡⚡⚡⚡⚡⚡ : ', error);
 
       ApiResponse.error(res, error as any);
     }
@@ -278,13 +311,14 @@ class UserController {
         throw _payload.error;
       }
 
-      const response = await AuthService.resetPassword(_payload.data);
+      const response = (await AuthService.resetPassword(_payload.data)) as any;
       if (response.success) {
         ApiResponse.success(res, response);
       } else {
         throw response;
       }
     } catch (error) {
+      // TODO: Modification of the repo-framework package for better error handling
       if (error instanceof ErrorResponse) {
         const { code, statusCode, message, suggestions } = error;
 
@@ -296,10 +330,11 @@ class UserController {
           },
         });
       }
+      console.log('⚡⚡⚡⚡⚡⚡ : ', error);
 
       ApiResponse.error(res, error as any);
     }
   }
 }
 
-export default UserController;
+export default AdminController;

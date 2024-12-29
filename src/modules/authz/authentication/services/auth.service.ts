@@ -1,3 +1,4 @@
+import { BaseService } from '@nodesandbox/repo-framework';
 import {
   ErrorResponse,
   ErrorResponseType,
@@ -6,12 +7,32 @@ import {
 import { AuthenticationStrategies } from 'modules/authz/authentication/strategies';
 import { OTPService, UserService } from 'modules/features/actions';
 import { IOTPModel } from 'modules/features/actions/otp/types';
+import { UserModel } from 'modules/features/actions/user/models';
+import { UserRepository } from 'modules/features/actions/user/repositories';
+import { IUserModel } from 'modules/features/actions/user/types';
 import { MailServiceUtilities } from 'modules/shared/notificator/mail';
 
-class AuthService {
+class AuthService extends BaseService<IUserModel, UserRepository> {
+  constructor() {
+    const userRepo = new UserRepository(UserModel);
+    super(userRepo, {
+      filter: {
+        allowedFields: ['firstname', 'email'],
+        defaultSort: { createdAt: -1 },
+      },
+      search: {
+        enabled: true,
+        fields: ['name', 'email'],
+        caseSensitive: false,
+        fuzzySearch: false,
+      },
+    });
+  }
+
   async register(payload: any) {
     try {
       const { email } = payload;
+
       const userResponse = await UserService.exists({ email: email });
 
       if (userResponse === true) {
@@ -77,7 +98,7 @@ class AuthService {
         throw new ErrorResponse({
           code: 'NOT_FOUND_ERROR',
           message: 'User not found.',
-          statusCode: 404,
+          statusCode: 408,
         });
       }
 
