@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@nodesandbox/response-kit';
+import { ErrorResponse } from '@nodesandbox/repo-framework/dist/handlers';
 import { ObjectSchema, ValidationError } from 'joi';
 
 /**
@@ -27,7 +27,12 @@ export const sanitize = <T>(
 
     return {
       success: false,
-      error: new ErrorResponse('VALIDATION_ERROR', message, suggestions, error),
+      error: new ErrorResponse({
+        code: 'VALIDATION_ERROR',
+        message: message,
+        suggestions: suggestions,
+        originalError: error,
+      }),
     };
   }
 
