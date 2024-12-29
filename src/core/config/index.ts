@@ -6,8 +6,8 @@ export interface Config {
   runningProd: boolean;
   app: string;
   port: number;
-  clientAuth: {
-    enableClientAuth: boolean;
+  adminAuth: {
+    enableAdminAuth: boolean;
     basicAuthUser: string;
     basicAuthPass: string;
     identifier: string;
@@ -97,11 +97,11 @@ export class ConfigService {
       runningProd: process.env.NODE_ENV === 'production',
       app: process.env.APP_NAME || 'myapp',
       port: parseInt(process.env.PORT || '5095', 10),
-      clientAuth: {
-        enableClientAuth: process.env.ENABLE_CLIENT_AUTH === 'true',
+      adminAuth: {
+        enableAdminAuth: process.env.ENABLE_ADMIN_AUTH === 'true',
         basicAuthUser: process.env.BASIC_AUTH_USER || 'admin',
         basicAuthPass: process.env.BASIC_AUTH_PASS || 'secret',
-        identifier: process.env.CLIENT_TOKEN_IDENTIFIER || 'x-client-token',
+        identifier: process.env.ADMIN_TOKEN_IDENTIFIER || 'x-admin-token',
       },
       jwt: {
         accessTokenSecret: process.env.ACCESS_TOKEN_SECRET || '',
