@@ -15,3 +15,4 @@ export const ADDRESS_MODEL_NAME = 'Address';
 export const WISHLISTS_MODEL_NAME = 'Wishlists';
 export const PROMOTIONS_MODEL_NAME = 'Promotions';
 export const NOTIFICATIONS_MODEL_NAME = 'Notifications';
+export const FILE_MODEL_NAME = 'File';
