@@ -54,6 +54,7 @@ export interface Config {
     apiPort: number;
     consolePort: number;
     useSSL: boolean;
+    bucketName: string;
   };
   mail: {
     host: string;
@@ -151,6 +152,7 @@ export class ConfigService {
         apiPort: parseInt(process.env.MINIO_API_PORT || '9000', 10),
         consolePort: parseInt(process.env.MINIO_EXT_CONSOLE_PORT || '5050', 10),
         useSSL: process.env.MINIO_USE_SSL === 'true',
+        bucketName: process.env.MINIO_BUCKET || 'my-new-bucket',
       },
       mail: {
         host:
