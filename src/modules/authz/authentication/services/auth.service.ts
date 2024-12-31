@@ -198,9 +198,7 @@ class AuthService extends BaseService<IUserModel, UserRepository> {
     }
   }
 
-  async loginWithPassword(
-    payload: any,
-  ): Promise<SuccessResponseType<any> | ErrorResponseType> {
+  async loginWithPassword(payload: any) {
     try {
       const { email, password } = payload;
       const userResponse = (await UserService.findOne({
@@ -211,20 +209,19 @@ class AuthService extends BaseService<IUserModel, UserRepository> {
         throw new ErrorResponse({
           code: 'UNAUTHORIZED',
           message: 'Invalid credentials.',
-          statusCode: 401,
+          // statusCode: 401,
         });
       }
 
       const user = userResponse.data.docs;
-      const isValidPasswordResponse = (await UserService.isvalidPassword(
+      const isValidPasswordResponse = await UserService.isvalidPassword(
         user.id,
         password,
-      )) as SuccessResponseType<{ isValid: boolean }>;
+      );
 
-      if (
-        !isValidPasswordResponse.success
-        // !isValidPasswordResponse.data?.docs?.isValid
-      ) {
+      const isValid = isValidPasswordResponse?.data?.isValid;
+
+      if (!isValid) {
         throw new ErrorResponse({
           code: 'UNAUTHORIZED',
           message: 'Invalid credentials.',

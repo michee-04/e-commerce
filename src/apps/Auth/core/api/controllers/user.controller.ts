@@ -10,6 +10,7 @@ import { AuthService } from 'modules/authz/authentication/services';
 import {
   createGenerateLoginOtpDto,
   createLoginWithOtpDto,
+  createLoginWithPasswordDto,
   createUserRequestDto,
   createVerifyAccountDto,
   forgotPasswordDto,
@@ -66,25 +67,15 @@ class UserController {
       }
 
       const response = await AuthService.verifyAccount(_payload.data);
-      if (response.success) {
-        ApiResponse.success(res, response);
-      } else {
-        throw response;
+      if (!response.success) {
+        throw response.error;
       }
+      ApiResponse.success(res, response);
     } catch (error) {
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -94,26 +85,21 @@ class UserController {
     next: NextFunction,
   ) {
     try {
-      const response = await AuthService.loginWithPassword(req.body);
-      if (response.success) {
-        ApiResponse.success(res, response);
-      } else {
-        throw response;
+      const _payload = sanitize(req.body, createLoginWithPasswordDto);
+      if (!_payload.success) {
+        throw _payload.error;
       }
+      const response = await AuthService.loginWithPassword(_payload.data);
+
+      if (!response.success) {
+        throw response.error;
+      }
+      ApiResponse.success(res, response);
     } catch (error) {
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -129,25 +115,15 @@ class UserController {
       }
 
       const response = await AuthService.generateLoginOtp(_payload.data);
-      if (response.success) {
-        ApiResponse.success(res, response);
-      } else {
-        throw response;
+      if (!response.success) {
+        throw response.error;
       }
+      ApiResponse.success(res, response);
     } catch (error) {
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -158,26 +134,16 @@ class UserController {
         throw _payload.error;
       }
 
-      const response = await AuthService.loginWithOtp(req.body);
-      if (response.success) {
-        ApiResponse.success(res, response);
-      } else {
-        throw response;
+      const response = await AuthService.loginWithOtp(_payload.data);
+      if (!response.success) {
+        throw response.error;
       }
+      ApiResponse.success(res, response);
     } catch (error) {
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -190,25 +156,15 @@ class UserController {
       }
 
       const response = await AuthService.refresh(_payload.data);
-      if (response.success) {
-        ApiResponse.success(res, response);
-      } else {
-        throw response;
+      if (!response.success) {
+        throw response.error;
       }
+      ApiResponse.success(res, response);
     } catch (error) {
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -219,25 +175,15 @@ class UserController {
         throw _payload.error;
       }
       const response = await AuthService.logout(_payload.data);
-      if (response.success) {
-        ApiResponse.success(res, response, 202);
-      } else {
-        throw response;
+      if (!response.success) {
+        throw response.error;
       }
+      ApiResponse.success(res, response, 202);
     } catch (error) {
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -248,25 +194,15 @@ class UserController {
         throw _payload.error;
       }
       const response = await AuthService.forgotPassword(_payload.data);
-      if (response.success) {
-        ApiResponse.success(res, response);
-      } else {
-        throw response;
+      if (!response.success) {
+        throw response.error;
       }
+      ApiResponse.success(res, response);
     } catch (error) {
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -279,25 +215,15 @@ class UserController {
       }
 
       const response = await AuthService.resetPassword(_payload.data);
-      if (response.success) {
-        ApiResponse.success(res, response);
-      } else {
-        throw response;
+      if (!response.success) {
+        throw response.error;
       }
+      ApiResponse.success(res, response);
     } catch (error) {
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 }

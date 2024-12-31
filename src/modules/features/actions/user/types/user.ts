@@ -1,4 +1,5 @@
 import { IBaseModel } from '@nodesandbox/repo-framework';
+import { Document } from 'mongoose';
 
 export interface IUser {
   firstname: string;
