@@ -1,2 +1,2 @@
-export * from './authenticate';
+export * from './authorize-request';
 export * from './client-authentication';
