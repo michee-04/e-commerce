@@ -1,1 +1,2 @@
-export * from './category.service';
+import CategoryService from './category.service';
+export { CategoryService };

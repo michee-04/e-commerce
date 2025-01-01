@@ -7,10 +7,10 @@ import FileService from 'apps/files/core/business/services/file.service';
 import { NextFunction, Request, Response } from 'express';
 import * as fs from 'fs';
 import { sanitize } from 'helpers';
-import categoryService from '../../business/services/category.service';
+import { CategoryService } from '../../business';
 import { CreateCategoryRequestDto, UpdateRequestDto } from '../dtos';
 
-export class categoryController {
+export class CategoryController {
   static async createCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const _payload = sanitize(req.body, CreateCategoryRequestDto);
@@ -31,7 +31,7 @@ export class categoryController {
         _payload.data.image = categoryImage?.data?._id;
       }
 
-      const response = await categoryService.createCategory(_payload.data);
+      const response = await CategoryService.createCategory(_payload.data);
 
       if (!response.success) {
         throw response.error;
@@ -49,14 +49,17 @@ export class categoryController {
   static async getCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const filters = req.query;
-      const response = await categoryService.getCategory(filters);
+      const response = await CategoryService.getCategory(filters);
       if (!response.success) {
         throw response.error;
       }
 
       ApiResponse.success(res, response);
     } catch (error) {
-      ApiResponse.error(res, error as ErrorResponseType);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -68,7 +71,7 @@ export class categoryController {
     try {
       const categoryId = req.params.id;
 
-      const response = await categoryService.findById(categoryId);
+      const response = await CategoryService.findById(categoryId);
 
       if (!response.success) {
         throw response.error;
@@ -104,7 +107,7 @@ export class categoryController {
         _payload.data.image = categoryImage?.data?._id;
       }
 
-      const response = await categoryService.updateById(
+      const response = await CategoryService.updateById(
         categoryId,
         _payload.data,
       );
@@ -162,7 +165,7 @@ export class categoryController {
     try {
       const categoryId = req.params.id;
 
-      const response = await categoryService.deleteById(categoryId);
+      const response = await CategoryService.deleteById(categoryId);
 
       if (!response.success) {
         throw response.error;

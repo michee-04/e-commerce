@@ -4,7 +4,7 @@ import {
   authorizeRequest,
 } from 'modules/authz/authentication/middlewares';
 import multer from 'multer';
-import { categoryController } from '../controllers';
+import { CategoryController } from '../controllers';
 
 const router = Router();
 const upload = multer();
@@ -14,29 +14,29 @@ router.post(
   upload.single('image'),
   authorizeRequest,
   adminAuthentication,
-  categoryController.createCategory,
+  CategoryController.createCategory,
 );
 
-router.get('/', categoryController.getCategory);
+router.get('/', CategoryController.getCategory);
 
-router.get('/:id', categoryController.getCategoryById);
+router.get('/:id', CategoryController.getCategoryById);
 
 router.put(
   '/update/:id',
   upload.single('image'),
   authorizeRequest,
   adminAuthentication,
-  categoryController.updateCategory,
+  CategoryController.updateCategory,
 );
 
-router.get('/image/:id/download', categoryController.downloadCategoryImage);
+router.get('/image/:id/download', CategoryController.downloadCategoryImage);
 
 router.delete(
   '/delete/:id',
   upload.single('image'),
   authorizeRequest,
   adminAuthentication,
-  categoryController.deleteCategory,
+  CategoryController.deleteCategory,
 );
 
 export default router;
