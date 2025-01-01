@@ -3,6 +3,7 @@ import {
   categoryRoutes,
   FileRoutes,
   googleRoutes,
+  ProductRoutes,
   userRoutes,
 } from 'apps';
 import { Router } from 'express';
@@ -26,5 +27,6 @@ export class RouterModule {
     RouterModule.router.use('/admin', adminRoutes);
     RouterModule.router.use('/category', categoryRoutes);
     RouterModule.router.use('/file', FileRoutes);
+    RouterModule.router.use('/product', ProductRoutes);
   }
 }
