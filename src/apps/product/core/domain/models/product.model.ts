@@ -14,7 +14,7 @@ const productSchema = createBaseSchema<IProductModel>(
       required: true,
     },
     price: {
-      type: Schema.Types.Decimal128,
+      type: String,
       required: true,
     },
     stockQte: {
@@ -23,7 +23,7 @@ const productSchema = createBaseSchema<IProductModel>(
     category: {
       type: Schema.Types.ObjectId,
       ref: CATEGORY_NAME_MODEL,
-      required: true,
+      // required: true,
     },
   },
   {
