@@ -3,10 +3,10 @@ import {
   ErrorResponse,
   ErrorResponseType,
   SuccessResponseType,
-} from '@nodesandbox/response-kit';
+} from '@nodesandbox/repo-framework/dist/handlers';
 import { generateRandomCode } from 'helpers';
 import { UserService } from 'modules/features/actions';
-import { IUserModel } from '../../user/types';
+import { MailServiceUtilities } from 'modules/shared/notificator/mail';
 import { OTPModel } from '../models';
 import { OTPRepository } from '../repositories';
 import { IOTPModel, TOTPPurpose } from '../types';
@@ -24,13 +24,12 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
     try {
       const userResponse = (await UserService.findOne({
         email,
-      })) as SuccessResponseType<IUserModel>;
-      if (!userResponse.success || !userResponse.document) {
-        // TODO: Customize this kind of error to override BaseService generic not found
+      })) as any;
+      if (!userResponse.success || !userResponse.data?.docs) {
         throw userResponse.error;
       }
 
-      const user = userResponse.document;
+      const user = userResponse.data.docs;
       await this.repository.invalidateOldCodes(user.id, purpose);
 
       const otp = await this.repository.create({
@@ -40,27 +39,27 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
         purpose,
       });
 
-      // const mailResponse = await MailServiceUtilities.sendOtp({
-      //   to: user.email,
-      //   code: otp.code,
-      //   purpose,
-      // });
+      const mailResponse = await MailServiceUtilities.sendOtp({
+        to: user.email,
+        code: otp.code,
+        purpose,
+      });
 
-      // if (!mailResponse.success) {
-      //   throw mailResponse.error;
-      // }
+      if (!mailResponse.success) {
+        throw mailResponse.error;
+      }
 
-      return { success: true, document: otp };
+      return { success: true, data: otp };
     } catch (error) {
       return {
         success: false,
         error:
           error instanceof ErrorResponse
             ? error
-            : new ErrorResponse(
-                'INTERNAL_SERVER_ERROR',
-                (error as Error).message,
-              ),
+            : new ErrorResponse({
+                code: 'INTERNAL_SERVER_ERROR',
+                message: (error as Error).message,
+              }),
       };
     }
   }
@@ -73,22 +72,28 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
     try {
       const userResponse = (await UserService.findOne({
         email,
-      })) as SuccessResponseType<IUserModel>;
-      if (!userResponse.success || !userResponse.document) {
-        throw new ErrorResponse('NOT_FOUND_ERROR', 'User not found.');
+      })) as any;
+      if (!userResponse.success || !userResponse.data?.docs) {
+        throw new ErrorResponse({
+          code: 'NOT_FOUND_ERROR',
+          message: 'User not found.',
+          statusCode: 404,
+        });
       }
 
-      const user = userResponse.document;
+      const user = userResponse.data.docs;
+
       const otpResponse = await this.repository.findValidCodeByUser(
         code,
-        user.id,
+        user._id,
         purpose,
       );
 
-      const invalidOtpError = new ErrorResponse(
-        'UNAUTHORIZED',
-        'This OTP code is invalid or has expired.',
-      );
+      const invalidOtpError = new ErrorResponse({
+        code: 'UNAUTHORIZED',
+        message: 'This OTP code is invalid or has expired.',
+        statusCode: 401,
+      });
 
       if (!otpResponse) {
         throw invalidOtpError;
@@ -98,8 +103,9 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
       if (await this.isExpired(otp)) {
         throw invalidOtpError;
       }
+      const otpId = otp._id as string;
 
-      await this.repository.markAsUsed(otp.id);
+      await this.repository.markAsUsed(otpId);
 
       return { success: true };
     } catch (error) {
@@ -108,10 +114,11 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
         error:
           error instanceof ErrorResponse
             ? error
-            : new ErrorResponse(
-                'INTERNAL_SERVER_ERROR',
-                (error as Error).message,
-              ),
+            : new ErrorResponse({
+                code: 'INTERNAL_SERVER_ERROR',
+                message: (error as Error).message,
+                statusCode: 500,
+              }),
       };
     }
   }

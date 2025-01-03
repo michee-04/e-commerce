@@ -6,8 +6,8 @@ export interface Config {
   runningProd: boolean;
   app: string;
   port: number;
-  clientAuth: {
-    enableClientAuth: boolean;
+  adminAuth: {
+    enableAdminAuth: boolean;
     basicAuthUser: string;
     basicAuthPass: string;
     identifier: string;
@@ -18,6 +18,11 @@ export interface Config {
     accessTokenExpireTime: string;
     refreshTokenExpireTime: string;
     tokenIssuer: string;
+  };
+  google: {
+    callbackUrl: string;
+    clientId: string;
+    secretClient: string;
   };
   rate: {
     limit: number;
@@ -49,6 +54,7 @@ export interface Config {
     apiPort: number;
     consolePort: number;
     useSSL: boolean;
+    bucketName: string;
   };
   mail: {
     host: string;
@@ -78,6 +84,9 @@ export interface Config {
     stores?: Array<string>;
     defaultStore: string;
   };
+  templateUrl: {
+    welcomeAccount: string;
+  };
 }
 
 export class ConfigService {
@@ -89,11 +98,11 @@ export class ConfigService {
       runningProd: process.env.NODE_ENV === 'production',
       app: process.env.APP_NAME || 'myapp',
       port: parseInt(process.env.PORT || '5095', 10),
-      clientAuth: {
-        enableClientAuth: process.env.ENABLE_CLIENT_AUTH === 'true',
+      adminAuth: {
+        enableAdminAuth: process.env.ENABLE_ADMIN_AUTH === 'true',
         basicAuthUser: process.env.BASIC_AUTH_USER || 'admin',
         basicAuthPass: process.env.BASIC_AUTH_PASS || 'secret',
-        identifier: process.env.CLIENT_TOKEN_IDENTIFIER || 'x-client-token',
+        identifier: process.env.ADMIN_TOKEN_IDENTIFIER || 'x-admin-token',
       },
       jwt: {
         accessTokenSecret: process.env.ACCESS_TOKEN_SECRET || '',
@@ -101,6 +110,11 @@ export class ConfigService {
         accessTokenExpireTime: process.env.ACCESS_TOKEN_EXPIRE_TIME || '1h',
         refreshTokenExpireTime: process.env.REFRESH_TOKEN_EXPIRE_TIME || '7d',
         tokenIssuer: process.env.TOKEN_ISSUER || 'your-issuer',
+      },
+      google: {
+        callbackUrl: process.env.GOOGLE_CALLBACK_URL || '',
+        clientId: process.env.GOOGLE_CLIENT_ID || '',
+        secretClient: process.env.GOOGLE_SECRET_CLIENT || '',
       },
       rate: {
         limit: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10), // 15 minutes in milliseconds
@@ -138,6 +152,7 @@ export class ConfigService {
         apiPort: parseInt(process.env.MINIO_API_PORT || '9000', 10),
         consolePort: parseInt(process.env.MINIO_EXT_CONSOLE_PORT || '5050', 10),
         useSSL: process.env.MINIO_USE_SSL === 'true',
+        bucketName: process.env.MINIO_BUCKET || 'my-new-bucket',
       },
       mail: {
         host:
@@ -232,6 +247,10 @@ export class ConfigService {
       fs: {
         stores: process.env.FILE_STORES?.split(','),
         defaultStore: process.env.FILE_STORAGE || 'disk',
+      },
+      templateUrl: {
+        welcomeAccount:
+          process.env.WELCOME_ACCOUNT || 'src/app/src/templates/mail',
       },
     };
   }

@@ -1,7 +1,7 @@
 import { BaseModel, createBaseSchema } from '@nodesandbox/repo-framework';
-import { IUserModel } from '../types';
-import { CallbackError } from 'mongoose';
 import { PasswordUtils } from 'helpers';
+import { CallbackError } from 'mongoose';
+import { IUserModel } from '../types';
 
 const USER_MODEL_NAME = 'User';
 
@@ -26,6 +26,11 @@ const userSchema = createBaseSchema<IUserModel>(
     password: {
       type: String,
       required: true,
+    },
+    role: {
+      type: String,
+      enum: ['user', 'admin', 'super-admin'],
+      default: 'user',
     },
     active: {
       type: Boolean,

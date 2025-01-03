@@ -3,4 +3,7 @@
  * Export all the apps routes here
  */
 
-export * from './demo';
+export * from './Auth';
+export * from './category';
+export * from './files';
+export * from './product';

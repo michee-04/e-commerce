@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
-export const clientAuthentication = (
+export const adminAuthentication = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const options = CONFIG.clientAuth;
+  const options = CONFIG.adminAuth;
 
   const clientToken = req.headers[options.identifier] as string;
 
