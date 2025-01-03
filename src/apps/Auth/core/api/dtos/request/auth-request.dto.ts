@@ -8,13 +8,13 @@ export const createUserRequestDto: ObjectSchema = Joi.object({
   password: Joi.string().min(8),
 });
 
-export const createAdminRequestDto: ObjectSchema = Joi.object({
+export const adminRequestDto: ObjectSchema = Joi.object({
   firstname: Joi.string().min(3).required(),
   lastname: Joi.string().min(3).required(),
   email: Joi.string().email().required(),
   phone: Joi.string().optional(),
   password: Joi.string().min(8),
-  role: Joi.string().valid('user', 'admin', 'super-admin').default('user'),
+  role: Joi.string().valid('user', 'admin', 'super-admin').default('admin'),
 });
 
 export const createVerifyAccountDto: ObjectSchema = Joi.object({

@@ -4,3 +4,6 @@
  */
 
 export * from './Auth';
+export * from './category';
+export * from './files';
+export * from './product';

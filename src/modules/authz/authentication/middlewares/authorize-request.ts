@@ -1,7 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { NextFunction, Request, Response } from 'express';
 import { AuthenticationStrategies } from '../strategies';
 
-export const authenticate = (
+export const authorizeRequest = (
   req: Request,
   res: Response,
   next: NextFunction,
