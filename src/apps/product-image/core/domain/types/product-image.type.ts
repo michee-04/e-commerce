@@ -2,7 +2,7 @@ import { IBaseModel } from '@nodesandbox/repo-framework';
 import { Document } from 'mongoose';
 
 export interface IProductImage {
-  productId: string;
+  product: string;
   imageUrl: string;
   altText: string;
   isPrimary: string;

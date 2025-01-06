@@ -8,10 +8,10 @@ import { IProductImageModel } from '../types';
 
 const productImageSchema = createBaseSchema<IProductImageModel>(
   {
-    productId: {
+    product: {
       type: Schema.Types.ObjectId,
       ref: PRODUCT_MODEL_NAME,
-      required: true,
+      // required: true,
     },
     imageUrl: {
       type: String,
