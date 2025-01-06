@@ -7,10 +7,10 @@ import { IProductAttributeModel } from '../types';
 
 const productAttributeSchema = createBaseSchema<IProductAttributeModel>(
   {
-    productId: {
+    product: {
       type: String,
       ref: PRODUCT_MODEL_NAME,
-      required: true,
+      // required: true,
     },
     attributeName: {
       type: String,
@@ -26,9 +26,9 @@ const productAttributeSchema = createBaseSchema<IProductAttributeModel>(
   },
 );
 
-const productAttributeMode = new BaseModel<IProductAttributeModel>(
+const productAttributeModel = new BaseModel<IProductAttributeModel>(
   PRODUCTATTRIBUTE_MODEL_NAME,
   productAttributeSchema,
 ).getModel();
 
-export { productAttributeMode, productAttributeSchema };
+export { productAttributeModel, productAttributeSchema };

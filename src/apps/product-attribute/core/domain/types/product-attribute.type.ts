@@ -2,7 +2,7 @@ import { IBaseModel } from '@nodesandbox/repo-framework';
 import { Document } from 'mongoose';
 
 export interface IProductAttribute {
-  productId: string;
+  product: string;
   attributeName: string;
   attributeValue: string;
 }

@@ -3,6 +3,7 @@ import {
   categoryRoutes,
   FileRoutes,
   googleRoutes,
+  ProductAttributeRoute,
   ProductRoutes,
   userRoutes,
 } from 'apps';
@@ -28,5 +29,6 @@ export class RouterModule {
     RouterModule.router.use('/category', categoryRoutes);
     RouterModule.router.use('/file', FileRoutes);
     RouterModule.router.use('/product', ProductRoutes);
+    RouterModule.router.use('/product-attribute', ProductAttributeRoute);
   }
 }
