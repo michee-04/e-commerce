@@ -6,5 +6,6 @@
 export * from './Auth';
 export * from './category';
 export * from './files';
+export * from './orders';
 export * from './product';
 export * from './product-attribute';

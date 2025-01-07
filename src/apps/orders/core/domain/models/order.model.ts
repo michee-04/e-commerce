@@ -5,7 +5,7 @@ import { IOrderModel } from '../types';
 
 const orderSchema = createBaseSchema<IOrderModel>(
   {
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: USER_MODEL_NAME,
       rquired: true,
