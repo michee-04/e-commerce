@@ -3,6 +3,7 @@ import { ApiResponse } from '@nodesandbox/repo-framework/dist/handlers';
 import { NextFunction, Request, Response } from 'express';
 import { extractResponseData, sanitize } from 'helpers';
 import { AuthService } from 'modules/authz/authentication/services';
+import { UserService } from 'modules/features/actions';
 import {
   adminRequestDto,
   createGenerateLoginOtpDto,
@@ -213,6 +214,23 @@ class AdminController {
       if (!response.success) {
         throw response.error;
       }
+      ApiResponse.success(res, response);
+    } catch (error) {
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
+    }
+  }
+
+  static async getAllUsers(req: Request, res: Response, next: NextFunction) {
+    try {
+      const filters = req.query;
+      const response = await UserService.getAllUsers(filters);
+      if (!response.success) {
+        throw response.error;
+      }
+
       ApiResponse.success(res, response);
     } catch (error) {
       ApiResponse.error(res, {

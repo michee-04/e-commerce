@@ -50,4 +50,6 @@ router.post(
   AdminController.resetPassword,
 );
 
+router.get('/allUsers', adminAuthentication, AdminController.getAllUsers);
+
 export default router;
