@@ -151,6 +151,17 @@ class UserService extends BaseService<IUserModel, UserRepository> {
       };
     }
   }
+
+  async getAllUsers(filters: any) {
+    const { page = 1, limit = 10, sort, search = '' } = filters;
+
+    return this.findAll({
+      sort: sort as Record<string, 1 | -1>,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      searchTerm: search as string,
+    });
+  }
 }
 
 export default new UserService();
