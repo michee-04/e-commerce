@@ -17,7 +17,7 @@ class ProductService extends BaseService<IProductModel, ProductRepository> {
       },
       search: {
         enabled: true,
-        fields: ['name', 'description', 'prix'],
+        fields: ['name', 'description', 'price'],
         caseSensitive: false,
         fuzzySearch: false,
       },
