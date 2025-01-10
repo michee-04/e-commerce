@@ -14,6 +14,7 @@ import { AppModule } from 'modules';
 
 const app = express();
 const AllRoutes = AppModule.getRouter();
+// const ViewRoutes = AppModule.getViewsRouter();
 
 // App middlewares
 const AuthMiddlewares = AppModule.fromAuthzModule().authentication.middlewares;
@@ -37,7 +38,7 @@ app.disable('x-powered-by'); // or helmet.hidePoweredBy()
 initializeSessionAndFlash(app);
 
 // Set view engine
-initializeViewEngine;
+initializeViewEngine(app);
 
 // Client authentication middleware
 // app.use(AuthMiddlewares.enableAdminAuth);
@@ -47,6 +48,7 @@ app.use(SharedMiddlewares.enableRateLimiter);
 
 // API Routes
 app.use('/api/v1', AllRoutes);
+// app.use('/views', ViewRoutes);
 
 // Error handlers
 app.use(NotFoundHandler);

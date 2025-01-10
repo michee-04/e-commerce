@@ -1,5 +1,6 @@
 import {
   adminRoutes,
+  authViews,
   categoryRoutes,
   FileRoutes,
   googleRoutes,
@@ -22,6 +23,7 @@ export class RouterModule {
 
   private static initializeRoutes(): void {
     RouterModule.router.use('', DevRoutes);
+    RouterModule.router.use('/views', authViews);
     RouterModule.router.use('/user', userRoutes);
     RouterModule.router.use('/google', googleRoutes);
     RouterModule.router.use('/admin', adminRoutes);
@@ -29,4 +31,18 @@ export class RouterModule {
     RouterModule.router.use('/file', FileRoutes);
     RouterModule.router.use('/product', ProductRoutes);
   }
+
+  // public static getViewsRouter(): Router {
+  //   if (!RouterModule.router) {
+  //     RouterModule.router = Router();
+  //     RouterModule.initializeViewsRoutes();
+  //   }
+  //   return RouterModule.router;
+  // }
+
+  // private static initializeViewsRoutes(): void {
+  //   console.log('🌹🌹🌹🌹 : ');
+
+  //   RouterModule.router.use('', authViews);
+  // }
 }
