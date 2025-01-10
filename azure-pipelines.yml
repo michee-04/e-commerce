@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main  # Déclenche le pipeline lorsque des modifications sont apportées à la branche main
+
+pool:
+  vmImage: 'ubuntu-latest'  # Utilisation d'une machine virtuelle avec Ubuntu
+
+steps:
+- task: UseNode@2  # Utilisation de Node.js
+  inputs:
+    versionSpec: '14.x'  # Version de Node.js
+
+- script: |
+    npm install  # Installe les dépendances de votre projet
+    npm run build  # Exécute la commande de build si nécessaire
+  displayName: 'Install dependencies and build'
+
+- script: |
+    npm test  # Exécute les tests si vous en avez
+  displayName: 'Run tests'
+
+- task: PublishBuildArtifacts@1  # Publie les artefacts de build
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'  # Spécifie où se trouvent les fichiers de build
+    artifactName: 'drop'  # Nom de l'artefact
+    publishLocation: 'Container'  # Le conteneur dans lequel les artefacts sont stockés
