@@ -9,6 +9,10 @@ export class AppModule {
     return RouterModule.getRouter();
   }
 
+  // public static getViewsRouter() {
+  //   return RouterModule.getViewsRouter();
+  // }
+
   public static fromAuthzModule() {
     return AuthzModule;
   }
