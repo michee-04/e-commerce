@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    
+        .opacity {
+            background-color: #c0d8d0;
+        }
+    
+        .btnGreen {
+            background-color: #3c7962;
+            color: #fefefe;
+        }
+    
+        .inputField {
+            background-color: #77bba2;
+            color: #313033;
+            border: none;
+            border-radius: 9999px;
+            display: block;
+            width: 100%;
+            padding: 10px 20px; 
+        }
+    
+    
+        .fillInput {
+            background-color: #77bba2;
+            color: #313033;
+            border: 1px solid gray;
+            outline: none;
+        }
+    
+        .fillInput:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+        }
+    
+    
+        .customGreen {
+            color: #c0d8d0;
+        }
+    
+        .bigGreenText {
+            color: #3c7962;
+        }
+    
+    </style>
+</head>
+<body>
+    <section class="">
+        <div class="absolute inset-0 opacity"></div>
+        <div class="relative px-4 text-center flex py-24">
+            <section class="mx-auto">
+                <div class="flex flex-col items-center justify-center py-8 mx-auto lg:py-0">
+                    <div class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                        <div class="p-6 space-y-2 md:space-y-3 sm:p-8">
+                            <h1 class="mb-4 text-4xl font-extrabold tracking-tight bigGreenText md:text-5xl">
+                                Connexion
+                            </h1>
+                            <p class="mb-8 text-xs font-normal lg:text-sm bigGreenText">
+                                Connecter vous pour continuer.
+                            </p>
+                            <form method="" class="space-y-4 md:space-y-8 pt-8" action="">
+                                <div>
+                                    <input 
+                                        type="email" 
+                                        name="email" 
+                                        id="email" 
+                                        class="fillInput rounded-full block w-full py-2.5 px-5" 
+                                        placeholder="Email" 
+                                        required
+                                    >
+                                </div>
+                                <div>
+                                    <input 
+                                        type="password" 
+                                        name="password" 
+                                        id="password" 
+                                        class="fillInput rounded-full block w-full py-2.5 px-5" 
+                                        placeholder="Mot de passe" 
+                                        required
+                                    >
+                                </div>
+                                <button 
+                                    type="submit" 
+                                    class="btnGreen uppercase w-full text-white font-bold rounded-full text-sm px-5 py-3 text-center"
+                                >
+                                    S'inscrire
+                                </button>
+                                <div class="space-y-2 md:space-y-5">
+                                    <p class="text-sm">
+                                        <a href="#" class="font-bold bigGreenText hover:underline">
+                                            Mot de passe oublié ?
+                                        </a>
+                                    </p>
+                                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                                        Vous n’avez pas de compte ? 
+                                        <a href="#" class="font-bold bigGreenText hover:underline">
+                                            Inscrivez-vous
+                                        </a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>            
+    </section>
+</body>
+</html>
