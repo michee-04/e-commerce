@@ -13,4 +13,10 @@ export class AuthViewsController {
       title: 'Login',
     });
   }
+
+  showRegisterPage(req: Request, res: Response) {
+    this.viewService.renderPage(req, res, 'pages/auth/register', {
+      title: 'Register',
+    });
+  }
 }
