@@ -9,4 +9,9 @@ router.get(
   authViewsController.showLoginPage.bind(authViewsController),
 );
 
+router.get(
+  '/register',
+  authViewsController.showRegisterPage.bind(authViewsController),
+);
+
 export default router;

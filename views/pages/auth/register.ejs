@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon"/>
+
+    <!-- Flowbite CSS (Only if needed) -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+
+
+    <!-- Google Fonts (Montserrat only) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+        /* Styles généraux */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            flex-direction: column;
+        }
+
+        .opacity {
+            background-color: #c0d8d0;
+        }
+
+        .btnGreen {
+            background-color: #3c7962;
+            color: #fefefe;
+        }
+
+        .inputField {
+            background-color: #77bba2;
+            color: #313033;
+            border: none;
+            border-radius: 9999px; /* rounded-full */
+            display: block;
+            width: 100%;
+            padding: 10px 20px; /* équivalent de py-2.5 px-5 */
+        }
+
+
+        .fillInput {
+            background-color: #77bba2;
+            color: #313033;
+            border: 1px solid gray; /* Garde la bordure grise par défaut */
+            outline: none; /* Supprime l'outline par défaut des navigateurs */
+        }
+
+        .fillInput:focus {
+            border-color: #28a745; /* Change la couleur de la bordure au focus */
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5); /* Ajoute un focus-ring vert */
+        }
+
+
+        .customGreen {
+            color: #c0d8d0;
+        }
+
+        .bigGreenText {
+            color: #3c7962;
+        }
+
+        /* Cacher la barre de défilement pour Chrome, Safari, et Opera */
+        .scroll-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Cacher la barre de défilement pour IE, Edge et Firefox */
+        .scroll-bar {
+            -ms-overflow-style: none; /* IE et Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+
+    </style>
+</head>
+<body>
+    <section class="">
+        <div class="absolute inset-0 opacity"></div>
+        <div class="relative mx-auto text-center py-10 max-w-xl max-h-screen overflow-auto scroll-bar">
+            <section class="mx-auto">
+                <div class="flex flex-col items-center justify-center mx-auto lg:p-0 px-4">
+                    <div class="w-full bg-gray-50 rounded-lg shadow-md lg:mt-0 mt-8">
+                        <div class="p-6 space-y-2 md:space-y-3 sm:p-8">
+                            <h1 class="mb-2 text-4xl font-extrabold tracking-tight bigGreenText md:text-5xl">
+                                Inscription
+                            </h1>
+                            <p class="mb-8 text-xs font-normal lg:text-sm bigGreenText">
+                                Inscrivez-vous pour commencer.
+                            </p>
+                            <form id="registerForm" class="space-y-4 md:space-y-8 pt-4">
+                                <div>
+                                    <input 
+                                        type="text" 
+                                        name="firstname" 
+                                        id="first_name" 
+                                        class="fillInput rounded-full block w-full py-2.5 px-5" 
+                                        placeholder="Nom" 
+                                        required
+                                    >
+                                </div>
+                                <div>
+                                    <input 
+                                        type="text" 
+                                        name="lastname" 
+                                        id="lastname" 
+                                        class="fillInput rounded-full block w-full py-2.5 px-5" 
+                                        placeholder="Prénom(s)" 
+                                        required
+                                    >
+                                </div>
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    id="email" 
+                                    class="fillInput inputField" 
+                                    placeholder="Adresse mail" 
+                                    required
+                                >
+
+                                <div>
+                                    <input 
+                                        type="password"
+                                        name="password" 
+                                        id="password" 
+                                        class="fillInput inputField" 
+                                        placeholder="Mot de passe" 
+                                        required
+                                    >
+                                </div>
+                                <div>
+                                    <input 
+                                        type="tel" 
+                                        name="phone" 
+                                        id="phone" 
+                                        class="fillInput rounded-full block w-full py-2.5 px-5" 
+                                        placeholder="N° de téléphone" 
+                                        required
+                                    >
+                                </div>
+                                <button
+                                    id="submitButton" 
+                                    type="submit" 
+                                    class="btnGreen uppercase w-full text-white font-bold rounded-full text-sm px-5 py-3 text-center"
+                                >
+                                    S'inscrire
+                                </button>
+                                <div class="space-y-2 md:space-y-5">
+                                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                                        Vous avez déjà un compte ? 
+                                        <a href="/api/v1/views/login" class="font-bold bigGreenText hover:underline">
+                                            connectez-vous
+                                        </a>
+                                    </p>
+                                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                                        prendre connaissance de
+                                        <a href="#" class="font-bold bigGreenText hover:underline">
+                                            la condition et politique de confidentialité 
+                                        </a>
+                                    </p>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>            
+    </section>
+    <script>
+        document.getElementById('submitButton').addEventListener('click', async () => {
+            const formData = {
+                firstname: document.getElementById('first_name').value,
+                lastname: document.getElementById('lastname').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                phone: document.getElementById('phone').value,
+            };
+    
+            try {
+                const response = await fetch('/api/v1/user/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+    
+                const result = await response.json();
+                console.log(result);
+    
+                if (response.ok) {
+                    alert('Inscription réussie !');
+                } else {
+                    alert(result.error.message || 'Erreur lors de l\'inscription');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue.');
+            }
+        });
+    </script>
+</body>
+</html>
