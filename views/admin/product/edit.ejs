@@ -1,0 +1,68 @@
+<form action="/api/v1/product/update/:id" id="drawer-update-product" class="fixed top-0 left-0 z-40 w-full h-screen max-w-xl p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-update-product-label" aria-hidden="true">
+    <h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">Modifier produit</h5>
+    <button type="button" data-drawer-dismiss="drawer-update-product" aria-controls="drawer-update-product" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+        <span class="sr-only">Close menu</span>
+    </button>
+    <div class="grid gap-4 sm:grid-cols-1 sm:gap-6 ">
+        <div class="space-y-4 sm:col-span-2 sm:space-y-6">
+            <!-- La catégorie indexée -->
+            <div>
+                <label for="categorie_id" class="block mb-2 text-sm text-gray-900">Catégorie</label>
+                <select id="categorie_id" name="categorie_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                    <option selected="" disabled>Choisir catégorie</option>
+                    <option value=""> Electronique </option>
+                    <option value=""> Ordinateur </option>
+                    <option value=""> Portable </option>
+                    <option value=""> Accessoir </option>
+                </select>
+            </div>
+            <!-- Le nom du produit -->
+            <div>
+                <label for="name" class="block mb-2 text-sm text-gray-900">Nom</label>
+                <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Catégorie" required>
+            </div>
+            <!-- La description du produit -->
+            <div>
+                <label for="description" class="block mb-2 text-sm text-gray-900">Description</label>
+                <textarea name="description" id="description" placeholder="La description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"></textarea>
+            </div>
+            <!-- Le prix du produit -->
+            <div>
+                <label for="price" class="block mb-2 text-sm text-gray-900">Prix unitaire</label>
+                <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Catégorie" required>
+            </div>
+            <!-- La quentité du produit -->
+            <div>
+                <label for="stock_quantity" class="block mb-2 text-sm text-gray-900">Quantité</label>
+                <input type="number" name="stock_quantity" id="stock_quantity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Catégorie" required>
+            </div>
+            <!-- Les images -->
+            <div>
+                <label for="image" class="block mb-2 text-sm text-gray-900">Image(s)</label>
+                <input type="file" name="images[]" multiple id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Image(s)" required>
+            </div>
+            <!-- Nom attibut-->
+            <div>
+                <label for="attribute_name " class="block mb-2 text-sm text-gray-900">Nom de l'attribue</label>
+                <input type="number" name="attribute_name " id="attribute_name " class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Nom attribue" required>
+            </div>
+            <!-- Valeur -->
+            <div>
+                <label for="attribute_value " class="block mb-2 text-sm text-gray-900">Valeur attribue</label>
+                <input type="number" name="attribute_value " id="attribute_value " class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Valeur attribue" required>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">
+        <button type="submit" class="btn-update focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update product</button>
+        <button type="button" class="text-red-600 inline-flex justify-center items-center hover:text-white border border-red-600 hover:bg-red-600 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+            <svg aria-hidden="true" class="w-5 h-5 mr-1 -ml-1" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            Delete
+        </button>
+    </div>
+</form>
