@@ -57,4 +57,65 @@
         background-color: #0D522C;
         color: #FFFFFF;
     }
+
+    
+
+
+    .carousel-hide img {
+        display: none; /* Cache complètement les images */
+      }
+      
+      .carousel-hide h3 {
+        opacity: 1; /* Rendre les titres visibles */
+        transform: scale(1); /* Taille normale des titres */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        display: block;
+        font-size: 16px; /* Taille des titres adaptée */
+        font-weight: bold;
+        text-align: center;
+        color: #1E40AF; /* Couleur bleu similaire au design */
+      }
+      
+      /* État normal où les images sont visibles */
+      .carousel-show img {
+        opacity: 1; /* Rendre les images visibles */
+        transform: scale(1); /* Taille normale des images */
+        display: block; /* Les images sont affichées */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      
+      .carousel-show h3 {
+        opacity: 1; /* Titres visibles */
+        transform: scale(0.8); /* Réduction de l'échelle */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        display: block;
+        font-size: 25px; /* Ajustez la taille des titres si nécessaire */
+        color: #1E40AF; /* Bleu pour les titres */
+      }
+      
+      /* Conteneur en état normal */
+      .carousel-show {
+        height: auto; /* Hauteur ajustée automatiquement */
+        overflow-x: auto; /* Autorise le défilement horizontal */
+        display: flex; /* Disposition en flexbox */
+        align-items: center; /* Centrage vertical des éléments */
+        transition: height 0.3s ease;
+      }
+      
+      /* Conteneur en état réduit */
+      .carousel-hide {
+        height: 50px; /* Hauteur fixe pour état réduit */
+        overflow-x: hidden; /* Désactive le défilement horizontal */
+        display: flex; /* Disposition en flexbox */
+        justify-content: center; /* Centrage horizontal des titres */
+        align-items: center; /* Centrage vertical des titres */
+        gap: 20px; /* Espacement entre les titres */
+        transition: height 0.3s ease, padding 0.3s ease;
+      }
+      
+      /* Transition pour lisser les changements */
+      .carousel-show,
+      .carousel-hide {
+        transition: height 0.3s ease, transform 0.3s ease;
+      }
 </style>
