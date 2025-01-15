@@ -8,8 +8,8 @@ import { GlobalInitializer } from 'helpers/config/init-globals';
 GlobalInitializer.init();
 
 // Import other modules
-import { initServices } from 'helpers';
 import { WebServer } from 'core/framework';
+import { initServices } from 'helpers';
 
 process.on('uncaughtException', function (err) {
   LOGGER.error('Uncaught Exception:', err);
@@ -17,11 +17,12 @@ process.on('uncaughtException', function (err) {
 });
 
 async function startServer() {
+  const port = process.env.PORT || 3000;
   try {
     await initServices();
     global.APP = WebServer.app;
-    APP.listen(CONFIG.port, () => {
-      LOGGER.info(`Server running on port ${CONFIG.port}`);
+    APP.listen(port, () => {
+      LOGGER.info(`Server running on port ${port}`);
     });
   } catch (error) {
     LOGGER.error('Failed to initialize services', error as any);
