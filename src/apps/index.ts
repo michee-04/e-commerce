@@ -7,5 +7,7 @@ export * from './Auth';
 export * from './category';
 export * from './files';
 export * from './orders';
+// TODO: doit etre tester d'abord
+export * from './orders-items';
 export * from './product';
 export * from './product-attribute';

@@ -3,6 +3,7 @@ import {
   categoryRoutes,
   FileRoutes,
   googleRoutes,
+  OrderItemsRoutes,
   OrdersRoutes,
   ProductAttributeRoute,
   ProductRoutes,
@@ -32,5 +33,6 @@ export class RouterModule {
     RouterModule.router.use('/product', ProductRoutes);
     RouterModule.router.use('/product-attribute', ProductAttributeRoute);
     RouterModule.router.use('/orders', OrdersRoutes);
+    RouterModule.router.use('/orders/items', OrderItemsRoutes);
   }
 }
