@@ -3,7 +3,7 @@ import {
   ORDER_MODEL_NAME,
   ORDERITEMS_MODEL_NAME,
   PRODUCT_MODEL_NAME,
-} from 'modules/shared/models';
+} from 'modules/shared/constants';
 import { Schema } from 'mongoose';
 import { IOrderItemsModel } from '../types';
 

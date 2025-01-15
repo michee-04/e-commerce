@@ -1,5 +1,5 @@
 import { BaseModel, createBaseSchema } from '@nodesandbox/repo-framework';
-import { ORDER_MODEL_NAME, USER_MODEL_NAME } from 'modules/shared/models';
+import { ORDER_MODEL_NAME, USER_MODEL_NAME } from 'modules/shared/constants';
 import { Schema } from 'mongoose';
 import { IOrderModel } from '../types';
 

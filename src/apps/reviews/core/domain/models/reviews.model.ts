@@ -3,7 +3,7 @@ import {
   PRODUCT_MODEL_NAME,
   REVIEWS_MODEL_NAME,
   USER_MODEL_NAME,
-} from 'modules/shared/models';
+} from 'modules/shared/constants';
 import { Schema } from 'mongoose';
 import { IReviewsModel } from '../types';
 

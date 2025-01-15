@@ -2,7 +2,7 @@ import { BaseModel, createBaseSchema } from '@nodesandbox/repo-framework';
 import {
   PRODUCT_MODEL_NAME,
   PROMOTIONS_MODEL_NAME,
-} from 'modules/shared/models';
+} from 'modules/shared/constants';
 import { Schema } from 'mongoose';
 import { IPromotionsModel } from '../types';
 

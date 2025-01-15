@@ -2,7 +2,7 @@ import { BaseModel, createBaseSchema } from '@nodesandbox/repo-framework';
 import {
   PRODUCT_MODEL_NAME,
   PRODUCTATTRIBUTE_MODEL_NAME,
-} from 'modules/shared/models';
+} from 'modules/shared/constants';
 import { IProductAttributeModel } from '../types';
 
 const productAttributeSchema = createBaseSchema<IProductAttributeModel>(

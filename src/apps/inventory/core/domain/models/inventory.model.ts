@@ -3,7 +3,7 @@ import {
   INVENTORY_MODEL_NAME,
   PRODUCT_MODEL_NAME,
   SUPPLIERS_MODEL_NAME,
-} from 'modules/shared/models';
+} from 'modules/shared/constants';
 import { Schema } from 'mongoose';
 import { IIventoryModel } from '../types';
 

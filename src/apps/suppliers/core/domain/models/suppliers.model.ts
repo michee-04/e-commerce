@@ -3,7 +3,7 @@ import {
   ADDRESS_MODEL_NAME,
   SUPPLIERS_MODEL_NAME,
   USER_MODEL_NAME,
-} from 'modules/shared/models';
+} from 'modules/shared/constants';
 import { Schema } from 'mongoose';
 import { ISuppliersModel } from '../types';
 

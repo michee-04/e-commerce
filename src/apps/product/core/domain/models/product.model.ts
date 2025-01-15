@@ -1,5 +1,8 @@
 import { BaseModel, createBaseSchema } from '@nodesandbox/repo-framework';
-import { CATEGORY_NAME_MODEL, PRODUCT_MODEL_NAME } from 'modules/shared/models';
+import {
+  CATEGORY_NAME_MODEL,
+  PRODUCT_MODEL_NAME,
+} from 'modules/shared/constants';
 import { Schema } from 'mongoose';
 import { IProductModel } from '../types';
 

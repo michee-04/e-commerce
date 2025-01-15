@@ -1,5 +1,5 @@
 import { BaseModel, createBaseSchema } from '@nodesandbox/repo-framework';
-import { COUPONS_MODEL_NAME } from 'modules/shared/models';
+import { COUPONS_MODEL_NAME } from 'modules/shared/constants';
 import { ICOuponsModel } from '../types';
 
 const couponsSchema = createBaseSchema<ICOuponsModel>(

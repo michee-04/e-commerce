@@ -1,5 +1,5 @@
 import { BaseModel, createBaseSchema } from '@nodesandbox/repo-framework';
-import { FILE_MODEL_NAME } from 'modules/shared/models';
+import { FILE_MODEL_NAME } from 'modules/shared/constants';
 import { IFileModel } from '../types';
 
 const fileSchema = createBaseSchema<IFileModel>(

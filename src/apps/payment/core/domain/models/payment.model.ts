@@ -3,7 +3,7 @@ import {
   ORDER_MODEL_NAME,
   PAYMENT_MODEL_NAME,
   TRANSACTIO_MODEL_NAME,
-} from 'modules/shared/models';
+} from 'modules/shared/constants';
 import { Schema } from 'mongoose';
 import { IPaymentModel } from '../types';
 

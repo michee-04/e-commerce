@@ -2,7 +2,7 @@ import { BaseModel, createBaseSchema } from '@nodesandbox/repo-framework';
 import {
   NOTIFICATIONS_MODEL_NAME,
   USER_MODEL_NAME,
-} from 'modules/shared/models';
+} from 'modules/shared/constants';
 import { Schema } from 'mongoose';
 import { INotificationsModel } from '../types';
 

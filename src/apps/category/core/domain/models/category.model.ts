@@ -1,5 +1,5 @@
 import { BaseModel, createBaseSchema } from '@nodesandbox/repo-framework';
-import { CATEGORY_NAME_MODEL } from 'modules/shared/models';
+import { CATEGORY_NAME_MODEL } from 'modules/shared/constants';
 import { ICategoryModel } from '../types';
 
 const categorySchema = createBaseSchema<ICategoryModel>(
