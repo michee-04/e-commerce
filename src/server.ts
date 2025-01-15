@@ -17,12 +17,11 @@ process.on('uncaughtException', function (err) {
 });
 
 async function startServer() {
-  const port = process.env.PORT || 3000;
   try {
     await initServices();
     global.APP = WebServer.app;
-    APP.listen(port, () => {
-      LOGGER.info(`Server running on port ${port}`);
+    APP.listen(CONFIG.port, () => {
+      LOGGER.info(`Server running on port ${CONFIG.port}`);
     });
   } catch (error) {
     LOGGER.error('Failed to initialize services', error as any);
