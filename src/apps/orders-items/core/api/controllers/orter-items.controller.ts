@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ApiResponse } from '@nodesandbox/repo-framework/dist/handlers';
+import { ApiResponse } from '@nodesandbox/response-kit';
 import { NextFunction, Request, Response } from 'express';
 import { sanitize } from 'helpers';
 import { OrderItemsService } from '../../business';

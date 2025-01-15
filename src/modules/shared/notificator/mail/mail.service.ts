@@ -2,7 +2,7 @@ import {
   ErrorResponse,
   ErrorResponseType,
   SuccessResponseType,
-} from '@nodesandbox/repo-framework/dist/handlers';
+} from '@nodesandbox/response-kit';
 import fs from 'fs';
 import handlebars from 'handlebars';
 import nodemailer, { Transporter } from 'nodemailer';

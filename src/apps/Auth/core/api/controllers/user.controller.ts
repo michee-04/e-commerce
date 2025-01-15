@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  ApiResponse,
-  ErrorResponse,
-  ErrorResponseType,
-} from '@nodesandbox/repo-framework/dist/handlers';
+
+import { ApiResponse, ErrorResponse } from '@nodesandbox/response-kit';
 import { NextFunction, Request, Response } from 'express';
 import { extractResponseData, sanitize } from 'helpers';
 import { AuthService } from 'modules/authz/authentication/services';
@@ -41,20 +38,10 @@ class UserController {
 
       ApiResponse.success(res, responseData, 201);
     } catch (error) {
-      // TODO: Modification of the repo-framework package for better error handling
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 

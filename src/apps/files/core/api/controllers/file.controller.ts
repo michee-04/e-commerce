@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ErrorResponse } from '@nodesandbox/repo-framework/dist/handlers';
 import {
   ApiResponse,
+  ErrorResponse,
   ErrorResponseType,
   SuccessResponseType,
 } from '@nodesandbox/response-kit';
@@ -28,20 +28,10 @@ export class FileController {
 
       ApiResponse.success(res, response, 201);
     } catch (error) {
-      // TODO: Modification of the repo-framework package for better error handling
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -65,20 +55,10 @@ export class FileController {
         throw response.error;
       }
     } catch (error) {
-      // TODO: Modification of the repo-framework package for better error handling
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -97,28 +77,18 @@ export class FileController {
 
       // TODO Corriger le telechargement des vidéos
       res.writeHead(200, {
-        'content-type': response.document?.mimetype,
-        'content-length': response.document?.size,
+        'content-type': response.data?.mimetype,
+        'content-length': response.data?.size,
       });
 
-      const filepath = response.document?.path as string;
+      const filepath = response.data?.path as string;
       const file = fs.readFileSync(filepath);
       res.end(file);
     } catch (error) {
-      // TODO: Modification of the repo-framework package for better error handling
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 
@@ -140,20 +110,10 @@ export class FileController {
 
       ApiResponse.success(res, response, 201);
     } catch (error) {
-      // TODO: Modification of the repo-framework package for better error handling
-      if (error instanceof ErrorResponse) {
-        const { code, statusCode, message, suggestions } = error;
-
-        return res.status(statusCode).json({
-          error: {
-            code: code,
-            message: message,
-            suggestions: suggestions || [],
-          },
-        });
-      }
-
-      ApiResponse.error(res, error as any);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
     }
   }
 }

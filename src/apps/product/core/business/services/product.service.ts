@@ -3,7 +3,7 @@ import {
   ErrorResponse,
   ErrorResponseType,
   SuccessResponseType,
-} from '@nodesandbox/repo-framework/dist/handlers';
+} from '@nodesandbox/response-kit';
 import { IProductModel, productModel } from '../../domain';
 import { ProductRepository } from '../repository';
 

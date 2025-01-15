@@ -2,7 +2,7 @@ import {
   ErrorResponse,
   ErrorResponseType,
   SuccessResponseType,
-} from '@nodesandbox/repo-framework/dist/handlers';
+} from '@nodesandbox/response-kit';
 import MailService from './mail.service';
 
 class MailServiceUtilities {

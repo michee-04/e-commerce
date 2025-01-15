@@ -3,7 +3,7 @@ import {
   ErrorResponse,
   ErrorResponseType,
   SuccessResponseType,
-} from '@nodesandbox/repo-framework/dist/handlers';
+} from '@nodesandbox/response-kit';
 import { AuthenticationStrategies } from 'modules/authz/authentication/strategies';
 import { OTPService, UserService } from 'modules/features/actions';
 import { IOTPModel } from 'modules/features/actions/otp/types';

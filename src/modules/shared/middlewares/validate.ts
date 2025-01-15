@@ -1,5 +1,5 @@
 import { ApiResponse, ErrorResponse } from '@nodesandbox/response-kit';
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { ObjectSchema } from 'joi';
 
 export const validateRequest = (schema: ObjectSchema) => {
@@ -8,7 +8,10 @@ export const validateRequest = (schema: ObjectSchema) => {
     if (error) {
       const { details } = error;
       const message = details.map((i) => i.message).join(',');
-      const errorResponse = new ErrorResponse('VALIDATION_ERROR', message);
+      const errorResponse = new ErrorResponse({
+        code: 'VALIDATION_ERROR',
+        message: `${message}`,
+      });
       LOGGER.error(errorResponse.message, error);
       return ApiResponse.error(res, {
         success: false,

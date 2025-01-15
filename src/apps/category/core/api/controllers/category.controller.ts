@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  ApiResponse,
-  ErrorResponseType,
-} from '@nodesandbox/repo-framework/dist/handlers';
+
+import { ApiResponse } from '@nodesandbox/response-kit';
 import FileService from 'apps/files/core/business/services/file.service';
 import { NextFunction, Request, Response } from 'express';
 import * as fs from 'fs';

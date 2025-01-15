@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@nodesandbox/repo-framework/dist/handlers';
+import { ErrorResponse } from '@nodesandbox/response-kit';
 import { ObjectSchema, ValidationError } from 'joi';
 
 /**

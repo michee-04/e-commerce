@@ -3,7 +3,7 @@ import {
   ErrorResponse,
   ErrorResponseType,
   SuccessResponseType,
-} from '@nodesandbox/repo-framework/dist/handlers';
+} from '@nodesandbox/response-kit';
 import { generateRandomCode } from 'helpers';
 import { UserService } from 'modules/features/actions';
 import { MailServiceUtilities } from 'modules/shared/notificator/mail';

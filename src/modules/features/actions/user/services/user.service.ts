@@ -2,7 +2,7 @@ import { BaseService } from '@nodesandbox/repo-framework';
 import {
   ErrorResponseType,
   SuccessResponseType,
-} from '@nodesandbox/repo-framework/dist/handlers';
+} from '@nodesandbox/response-kit';
 import { PasswordUtils } from 'helpers';
 import { UserModel } from '../models';
 import { UserRepository } from '../repositories';

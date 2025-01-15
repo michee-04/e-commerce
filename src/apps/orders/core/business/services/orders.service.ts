@@ -1,5 +1,5 @@
 import { BaseService } from '@nodesandbox/repo-framework';
-import { ErrorResponse } from '@nodesandbox/repo-framework/dist/handlers';
+import { ErrorResponse } from '@nodesandbox/response-kit';
 import { IOrderModel, orderModel } from '../../domain';
 import { OrdersRepository } from '../repository';
 
