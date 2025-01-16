@@ -21,8 +21,8 @@ class OrderItemsService extends BaseService<
       },
       populate: {
         fields: [
-          { path: 'order', select: '_id firstname email phone' },
-          { path: 'product', select: '_id user totalAmount status' },
+          { path: 'order', select: '_id status shoppingAddress' },
+          { path: 'product', select: '_id name price stockQte' },
         ],
         defaultPopulate: true,
       },
