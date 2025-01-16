@@ -9,10 +9,9 @@ export const createOrdersRequestDto: ObjectSchema = Joi.object({
 });
 
 export const updateOrdersRequestDto: ObjectSchema = Joi.object({
-  user: Joi.string(),
-  totalAmount: Joi.number().precision(2),
   status: Joi.string()
     .valid('processing', 'shipped', 'delivered', 'cancelled')
-    .default('processing'),
+    .default('processing')
+    .required(),
   shoppingAddress: Joi.string().optional(),
 });

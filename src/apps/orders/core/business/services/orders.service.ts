@@ -55,9 +55,9 @@ class OrdersService extends BaseService<IOrderModel, OrdersRepository> {
   async verifyOrderOwnership(orderId: string, userId: string) {
     try {
       const order = await this.repository.findById(orderId);
-      console.log('🎓🎓🎓🎓🎓🎓🎓', order);
+      const user = order?.user;
 
-      if (order?.data.doc.user !== userId) {
+      if (user?.toString() !== userId) {
         throw new ErrorResponse({
           code: 'UNAUTHORIZED',
           message: 'User is not authorized to access this order',

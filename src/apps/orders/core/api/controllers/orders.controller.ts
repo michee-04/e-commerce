@@ -100,6 +100,7 @@ export class OrdersController {
     try {
       const orderId = req.params.orderId;
       const userId = req.params.userId;
+
       const _payload = sanitize(req.body, updateOrdersRequestDto);
 
       if (!_payload.success) {
