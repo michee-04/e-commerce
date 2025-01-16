@@ -9,14 +9,15 @@ import { IReviewsModel } from '../types';
 
 const reviewsSchema = createBaseSchema<IReviewsModel>(
   {
-    productId: {
+    product: {
       type: Schema.Types.ObjectId,
       ref: PRODUCT_MODEL_NAME,
       required: true,
     },
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: USER_MODEL_NAME,
+      required: true,
     },
     rading: {
       type: Number,

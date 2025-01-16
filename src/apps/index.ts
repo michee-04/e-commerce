@@ -7,7 +7,8 @@ export * from './Auth';
 export * from './category';
 export * from './files';
 export * from './orders';
-// TODO: doit etre tester d'abord
+// TODO: getIdOrderItems doit etre tester
 export * from './orders-items';
 export * from './product';
 export * from './product-attribute';
+export * from './reviews';

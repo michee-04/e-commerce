@@ -7,6 +7,7 @@ import {
   OrdersRoutes,
   ProductAttributeRoute,
   ProductRoutes,
+  ReviewsRoute,
   userRoutes,
 } from 'apps';
 import { Router } from 'express';
@@ -34,5 +35,6 @@ export class RouterModule {
     RouterModule.router.use('/product-attribute', ProductAttributeRoute);
     RouterModule.router.use('/orders', OrdersRoutes);
     RouterModule.router.use('/orders/items', OrderItemsRoutes);
+    RouterModule.router.use('/reviews', ReviewsRoute);
   }
 }
