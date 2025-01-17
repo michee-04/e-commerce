@@ -9,7 +9,7 @@ import { ISuppliersModel } from '../types';
 
 const suppliersSchema = createBaseSchema<ISuppliersModel>(
   {
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: USER_MODEL_NAME,
       required: true,
@@ -17,10 +17,10 @@ const suppliersSchema = createBaseSchema<ISuppliersModel>(
     contactName: {
       type: String,
     },
-    addressId: {
+    address: {
       type: Schema.Types.ObjectId,
       ref: ADDRESS_MODEL_NAME,
-      required: true,
+      // required: true,
     },
   },
   {

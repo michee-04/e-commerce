@@ -1,7 +1,7 @@
 import Joi, { ObjectSchema } from 'joi';
 
-export const createSuppliersRequestDto: ObjectSchema = Joi.object({
-  userId: Joi.string().required(),
+export const SuppliersRequestDto: ObjectSchema = Joi.object({
+  user: Joi.string().required(),
   contactName: Joi.string().optional(),
   addresseId: Joi.string().required(),
 });

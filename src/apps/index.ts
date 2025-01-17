@@ -8,7 +8,9 @@ export * from './category';
 export * from './files';
 export * from './orders';
 // TODO: getIdOrderItems doit etre tester
+export * from './inventory';
 export * from './orders-items';
 export * from './product';
 export * from './product-attribute';
 export * from './reviews';
+export * from './suppliers';
