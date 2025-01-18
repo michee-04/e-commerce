@@ -9,12 +9,12 @@ import { IWishlistsModel } from '../types';
 
 const wishlistsSchema = createBaseSchema<IWishlistsModel>(
   {
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: USER_MODEL_NAME,
       required: true,
     },
-    productId: {
+    product: {
       type: Schema.Types.ObjectId,
       ref: PRODUCT_MODEL_NAME,
       required: true,
@@ -28,6 +28,6 @@ const wishlistsSchema = createBaseSchema<IWishlistsModel>(
 const wishlistsModel = new BaseModel<IWishlistsModel>(
   WISHLISTS_MODEL_NAME,
   wishlistsSchema,
-);
+).getModel();
 
 export { wishlistsModel, wishlistsSchema };
