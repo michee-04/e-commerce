@@ -1,6 +1,7 @@
 import {
   adminRoutes,
   categoryRoutes,
+  CouponsRoute,
   FileRoutes,
   googleRoutes,
   InventoryRoute,
@@ -8,9 +9,11 @@ import {
   OrdersRoutes,
   ProductAttributeRoute,
   ProductRoutes,
+  PromotionRoute,
   ReviewsRoute,
   SuppliersRoute,
   userRoutes,
+  WishlistsRoute,
 } from 'apps';
 import { Router } from 'express';
 import { DevRoutes } from 'modules/features';
@@ -37,9 +40,12 @@ export class RouterModule {
     RouterModule.router.use('/product-attribute', ProductAttributeRoute);
     RouterModule.router.use('/orders', OrdersRoutes);
     RouterModule.router.use('/orders/items', OrderItemsRoutes);
-    // TODO: Tous ses fonctionnalite en bas doit etre tester
     RouterModule.router.use('/reviews', ReviewsRoute);
     RouterModule.router.use('/inventory', InventoryRoute);
     RouterModule.router.use('/supplier', SuppliersRoute);
+    RouterModule.router.use('/promotion', PromotionRoute);
+    RouterModule.router.use('/wishlist', WishlistsRoute);
+    RouterModule.router.use('/coupons', CouponsRoute);
+    RouterModule.router.use('/promotion', PromotionRoute);
   }
 }

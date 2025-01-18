@@ -14,6 +14,7 @@ const couponsSchema = createBaseSchema<ICOuponsModel>(
     },
     discountType: {
       type: String,
+      enum: ['percentage', 'fixed'],
     },
     discountValue: {
       type: String,

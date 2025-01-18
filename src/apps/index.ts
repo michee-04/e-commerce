@@ -7,10 +7,13 @@ export * from './Auth';
 export * from './category';
 export * from './files';
 export * from './orders';
-// TODO: getIdOrderItems doit etre tester
+// TODO: (getIdOrderItems, inventory, coupons) doivent etre tester
+export * from './coupons';
 export * from './inventory';
 export * from './orders-items';
 export * from './product';
 export * from './product-attribute';
+export * from './promotions';
 export * from './reviews';
 export * from './suppliers';
+export * from './wishlists';

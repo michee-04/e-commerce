@@ -1,10 +1,10 @@
 import Joi, { ObjectSchema } from 'joi';
 
-export const createCouponsRequestDto: ObjectSchema = Joi.object({
+export const CouponsRequestDto: ObjectSchema = Joi.object({
   code: Joi.string().min(3).required(),
   description: Joi.string().min(3),
-  discountType: Joi.string(),
-  discountValue: Joi.string(),
+  discountType: Joi.string().valid('percentage', 'fixed'),
+  discountValue: Joi.number().precision(2),
   startDate: Joi.date().required(),
   endDate: Joi.date().required(),
 });
