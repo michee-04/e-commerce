@@ -2,7 +2,7 @@ import { IBaseModel } from '@nodesandbox/repo-framework';
 import { Document } from 'mongoose';
 
 export interface IPromotions {
-  productId: string;
+  product: string;
   discountPourcentage: any;
   startDate: Date;
   endDate: Date;

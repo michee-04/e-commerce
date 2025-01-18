@@ -8,13 +8,14 @@ import { IPromotionsModel } from '../types';
 
 const promotionsSchema = createBaseSchema<IPromotionsModel>(
   {
-    productId: {
+    product: {
       type: Schema.Types.ObjectId,
       ref: PRODUCT_MODEL_NAME,
       required: true,
     },
     discountPourcentage: {
-      type: Schema.Types.Decimal128,
+      type: String,
+      required: true,
     },
     startDate: {
       type: Date,
