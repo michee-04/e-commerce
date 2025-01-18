@@ -2,7 +2,7 @@ import { ApiResponse } from '@nodesandbox/response-kit';
 import { Request, Response } from 'express';
 import { sanitize } from 'helpers';
 import { SuppliersService } from '../../business';
-import { SuppliersRequestDto } from '../dtos';
+import { SuppliersRequestDto, updateSuppliersRequestDto } from '../dtos';
 
 export class SuppliersController {
   static async createSuppliers(req: Request, res: Response) {
@@ -68,7 +68,7 @@ export class SuppliersController {
   static async updateSupplier(req: Request, res: Response) {
     try {
       const supplierId = req.params.id;
-      const _payload = sanitize(req.body, SuppliersRequestDto);
+      const _payload = sanitize(req.body, updateSuppliersRequestDto);
 
       if (!_payload.success) {
         throw _payload.error;

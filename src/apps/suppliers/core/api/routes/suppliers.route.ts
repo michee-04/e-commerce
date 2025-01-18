@@ -22,21 +22,21 @@ router.get(
 );
 
 router.get(
-  '/:supplierId',
+  '/:id',
   authorizeRequest,
   adminAuthentication,
   SuppliersController.getSupplierById,
 );
 
 router.put(
-  '/:supplierId',
+  '/:id',
   authorizeRequest,
   adminAuthentication,
   SuppliersController.updateSupplier,
 );
 
 router.delete(
-  '/:supplierId',
+  '/:id',
   authorizeRequest,
   adminAuthentication,
   SuppliersController.deleteSupplier,

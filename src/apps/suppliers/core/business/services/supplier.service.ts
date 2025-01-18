@@ -15,7 +15,7 @@ class SuppliersService extends BaseService<
       },
       search: {
         enabled: true,
-        fields: ['user', 'contactName'],
+        fields: ['contactName'],
         caseSensitive: false,
         fuzzySearch: false,
       },
