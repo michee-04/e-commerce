@@ -10,19 +10,38 @@ class ProductImageService extends BaseService<
     const productImageRepo = new ProductImageRepository(productImageModel);
     super(productImageRepo, {
       filter: {
-        allowedFields: ['product', 'imageUrl', 'altText'],
+        allowedFields: ['imageUrl', 'altText', 'isPrimary'],
         defaultSort: { createdAt: -1 },
       },
       search: {
         enabled: true,
-        fields: ['product', 'imageUrl', 'altText', 'isPrimary'],
+        fields: ['imageUrl', 'altText'],
         caseSensitive: false,
         fuzzySearch: false,
       },
       populate: {
-        fields: [{ path: 'product', select: '_id name description' }],
+        fields: [
+          { path: 'product', select: '_id name description' },
+          { path: 'image', select: '_id type url' },
+        ],
         defaultPopulate: true,
       },
+    });
+  }
+
+  async getProductImage(filters: any) {
+    const { page = 1, limit = 10, sort, search = '', product } = filters;
+
+    const query: any = {};
+
+    if (product) query.product = product;
+
+    return this.findAll({
+      query,
+      sort: sort as Record<string, 1 | -1>,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      searchTerm: search as string,
     });
   }
 }

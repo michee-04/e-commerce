@@ -8,6 +8,7 @@ import {
   OrderItemsRoutes,
   OrdersRoutes,
   ProductAttributeRoute,
+  ProductImageRoute,
   ProductRoutes,
   PromotionRoute,
   ReviewsRoute,
@@ -47,5 +48,6 @@ export class RouterModule {
     RouterModule.router.use('/wishlist', WishlistsRoute);
     RouterModule.router.use('/coupons', CouponsRoute);
     RouterModule.router.use('/promotion', PromotionRoute);
+    RouterModule.router.use('/image', ProductImageRoute);
   }
 }

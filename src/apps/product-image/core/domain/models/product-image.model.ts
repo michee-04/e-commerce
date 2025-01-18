@@ -13,7 +13,7 @@ const productImageSchema = createBaseSchema<IProductImageModel>(
       ref: PRODUCT_MODEL_NAME,
       // required: true,
     },
-    imageUrl: {
+    image: {
       type: String,
     },
     altText: {

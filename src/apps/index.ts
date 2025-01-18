@@ -13,6 +13,7 @@ export * from './inventory';
 export * from './orders-items';
 export * from './product';
 export * from './product-attribute';
+export * from './product-image';
 export * from './promotions';
 export * from './reviews';
 export * from './suppliers';
