@@ -7,14 +7,21 @@ class ReviewsService extends BaseService<IReviewsModel, ReviewsRepository> {
     const reviewsRepo = new ReviewsRepository(reviewsModel);
     super(reviewsRepo, {
       filter: {
-        allowedFields: ['product', 'rading', 'comment'],
+        allowedFields: ['comment', 'rading'],
         defaultSort: { createdAt: -1 },
       },
       search: {
         enabled: true,
-        fields: ['product', 'rading', 'comment', 'user'],
+        fields: ['comment', 'rading'],
         caseSensitive: false,
         fuzzySearch: false,
+      },
+      populate: {
+        fields: [
+          { path: 'product', select: 'name description' },
+          { path: 'user', select: 'firstname email' },
+        ],
+        defaultPopulate: true,
       },
     });
   }

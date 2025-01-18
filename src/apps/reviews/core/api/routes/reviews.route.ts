@@ -4,7 +4,11 @@ import { ReviewsController } from '../controllers';
 
 const router = Router();
 
-router.post('/', authorizeRequest, ReviewsController.createReviews);
+router.post(
+  '/:userId/:productId',
+  authorizeRequest,
+  ReviewsController.createReviews,
+);
 
 router.get('/', authorizeRequest, ReviewsController.getAllReviews);
 

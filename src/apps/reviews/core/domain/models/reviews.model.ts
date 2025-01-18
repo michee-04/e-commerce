@@ -12,15 +12,13 @@ const reviewsSchema = createBaseSchema<IReviewsModel>(
     product: {
       type: Schema.Types.ObjectId,
       ref: PRODUCT_MODEL_NAME,
-      required: true,
     },
     user: {
       type: Schema.Types.ObjectId,
       ref: USER_MODEL_NAME,
-      required: true,
     },
     rading: {
-      type: Number,
+      type: String,
     },
     comment: {
       type: String,

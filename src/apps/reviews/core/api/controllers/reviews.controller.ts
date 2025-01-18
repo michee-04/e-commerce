@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ApiResponse } from '@nodesandbox/response-kit';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { sanitize } from 'helpers';
 import { ReviewsService } from '../../business';
 import { ReviewsRequestDto } from '../dtos';
@@ -36,7 +37,7 @@ export class ReviewsController {
     }
   }
 
-  static async getAllReviews(req: Request, res: Response) {
+  static async getAllReviews(req: Request, res: Response, next: NextFunction) {
     try {
       const filters = req.query;
       const response = await ReviewsService.getReviews(filters);
@@ -44,7 +45,7 @@ export class ReviewsController {
         throw response.error;
       }
 
-      ApiResponse.success(res, response);
+      ApiResponse.success(res, response, 202);
     } catch (error) {
       ApiResponse.error(res, {
         success: false,
