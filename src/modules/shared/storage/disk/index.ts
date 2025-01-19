@@ -67,7 +67,7 @@ export class DiskStorageService {
 
       const hashedName = encryptAES(
         fileId,
-        process.env.CRYPTAGE_KEY || 'secret-key',
+        process.env.ENCRYPTAGE_KEY || 'secret-key',
       );
 
       const fileData: FileMetadata = {

@@ -43,7 +43,7 @@ class FileService extends BaseService<IFileModel, FileRepository> {
 
       const hashedName = encryptAES(
         meta.originalname,
-        process.env.CRYPTAGE_KEY || 'secret-key',
+        process.env.ENCRYPTAGE_KEY || 'secret-key',
       );
       const insertFile = {
         hash: hashedName,

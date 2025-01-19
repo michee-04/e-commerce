@@ -23,6 +23,7 @@ export interface Config {
     callbackUrl: string;
     clientId: string;
     secretClient: string;
+    password: string;
   };
   rate: {
     limit: number;
@@ -142,6 +143,7 @@ export class ConfigService {
         callbackUrl: process.env.GOOGLE_CALLBACK_URL || '',
         clientId: process.env.GOOGLE_CLIENT_ID || '',
         secretClient: process.env.GOOGLE_SECRET_CLIENT || '',
+        password: process.env.GOOGLE_PASSWORD || '',
       },
       rate: {
         limit: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10), // 15 minutes in milliseconds
