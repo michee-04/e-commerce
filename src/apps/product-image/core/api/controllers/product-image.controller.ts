@@ -62,6 +62,27 @@ export class ProductImageController {
     }
   }
 
+  static async getAllProductImage(req: Request, res: Response) {
+    try {
+      const productId = req.params.productId;
+
+      const filters = { ...req.query, product: productId };
+      const response = await ProductImageService.getProductImage(filters);
+      if (!response.success) {
+        throw response.error;
+      }
+
+      ApiResponse.success(res, response);
+    } catch (error) {
+      console.log('🐧🐧🐧🐧🐧 : ', error);
+
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
+    }
+  }
+
   static async getProductImageById(req: Request, res: Response) {
     try {
       const productImageId = req.params.id;

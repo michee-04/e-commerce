@@ -17,7 +17,9 @@ router.post(
   ProductImageController.createProductImage,
 );
 
-router.get('/', ProductImageController.getProductImage);
+router.get('/:productId', ProductImageController.getProductImage);
+
+router.get('/', ProductImageController.getAllProductImage);
 
 router.get('/:id', ProductImageController.getProductImageById);
 

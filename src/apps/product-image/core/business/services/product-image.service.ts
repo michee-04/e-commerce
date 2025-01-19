@@ -1,4 +1,5 @@
 import { BaseService } from '@nodesandbox/repo-framework';
+import { ErrorResponse } from '@nodesandbox/response-kit';
 import { IProductImageModel, productImageModel } from '../../domain';
 import { ProductImageRepository } from '../repository';
 
@@ -10,7 +11,7 @@ class ProductImageService extends BaseService<
     const productImageRepo = new ProductImageRepository(productImageModel);
     super(productImageRepo, {
       filter: {
-        allowedFields: ['imageUrl', 'altText', 'isPrimary'],
+        allowedFields: ['imageUrl', 'altText', 'isPrimary', 'product'],
         defaultSort: { createdAt: -1 },
       },
       search: {
@@ -31,6 +32,13 @@ class ProductImageService extends BaseService<
 
   async getProductImage(filters: any) {
     const { page = 1, limit = 10, sort, search = '', product } = filters;
+
+    if (product === ':productId') {
+      throw new ErrorResponse({
+        code: 'BAD_REQUEST',
+        message: "Entrez l'identifiant du produit image",
+      });
+    }
 
     const query: any = {};
 
