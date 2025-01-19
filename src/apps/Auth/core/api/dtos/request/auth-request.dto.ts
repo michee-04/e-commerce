@@ -5,7 +5,7 @@ export const createUserRequestDto: ObjectSchema = Joi.object({
   lastname: Joi.string().min(3).required(),
   email: Joi.string().email().required(),
   phone: Joi.string().optional(),
-  password: Joi.string().min(8),
+  password: Joi.string().required().min(8),
 });
 
 export const adminRequestDto: ObjectSchema = Joi.object({
@@ -13,7 +13,7 @@ export const adminRequestDto: ObjectSchema = Joi.object({
   lastname: Joi.string().min(3).required(),
   email: Joi.string().email().required(),
   phone: Joi.string().optional(),
-  password: Joi.string().min(8),
+  password: Joi.string().required().min(8),
   role: Joi.string().valid('user', 'admin', 'super-admin').default('admin'),
 });
 

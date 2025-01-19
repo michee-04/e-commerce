@@ -574,6 +574,65 @@ class AuthService extends BaseService<IUserModel, UserRepository> {
       };
     }
   }
+
+  async connectByGoogle(payload: any) {
+    try {
+      const { email } = payload;
+
+      const userExists = (await UserService.exists({ email: email })) as any;
+
+      if (!userExists) {
+        const createUserResponse = (await UserService.create(payload)) as any;
+
+        const user = createUserResponse.data.docs;
+
+        const accessToken = await AuthenticationStrategies.jwt.signAccessToken(
+          user.id,
+        );
+        const refreshToken =
+          await AuthenticationStrategies.jwt.signRefreshToken(user.id);
+
+        return {
+          success: true,
+          data: {
+            token: { access: accessToken, refresh: refreshToken },
+            user,
+          },
+        };
+      }
+
+      const userResponse = (await UserService.findOne({ email: email })) as any;
+
+      const user = userResponse.data.docs;
+
+      const accessToken = await AuthenticationStrategies.jwt.signAccessToken(
+        user.id,
+      );
+      const refreshToken = await AuthenticationStrategies.jwt.signRefreshToken(
+        user.id,
+      );
+
+      return {
+        success: true,
+        data: {
+          token: { access: accessToken, refresh: refreshToken },
+          user,
+        },
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error:
+          error instanceof ErrorResponse
+            ? error
+            : new ErrorResponse({
+                code: 'INTERNAL_SERVER_ERROR',
+                message: (error as Error).message,
+                statusCode: 500,
+              }),
+      };
+    }
+  }
 }
 
 export default new AuthService();
