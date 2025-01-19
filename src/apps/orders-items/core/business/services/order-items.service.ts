@@ -30,12 +30,21 @@ class OrderItemsService extends BaseService<
   }
 
   async getOrders(filters: any) {
-    const { page = 1, limit = 10, sort, search = '', user, order } = filters;
+    const {
+      page = 1,
+      limit = 10,
+      sort,
+      search = '',
+      user,
+      order,
+      _id,
+    } = filters;
 
     const query: any = {};
 
     if (user) query.user = user;
     if (order) query.order = order;
+    if (_id) query._id = _id;
 
     return this.findAll({
       query,

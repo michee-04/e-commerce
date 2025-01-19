@@ -23,8 +23,11 @@ export class OrderItemController {
         throw _payload.error;
       }
 
-      _payload.data.order = order;
-      _payload.data.product = product;
+      _payload.data = {
+        ..._payload.data,
+        order,
+        product,
+      };
 
       const response = await OrderItemsService.create(_payload.data);
 
@@ -71,8 +74,9 @@ export class OrderItemController {
     next: NextFunction,
   ) {
     try {
-      const orderItemId = req.params.id;
-      const filters = { ...req.query, _id: orderItemId };
+      const orderItemId = req.params.orderItemId;
+      const order = req.params.orderId;
+      const filters = { ...req.query, order: order, _id: orderItemId };
 
       const response = await OrderItemsService.getOrders(filters);
 
@@ -80,8 +84,32 @@ export class OrderItemController {
         throw response.error;
       }
 
-      ApiResponse.success(res, response, 200);
+      ApiResponse.success(res, response);
     } catch (error) {
+      console.log('🐧🐧🐧🐧 : ', error);
+      ApiResponse.error(res, {
+        success: false,
+        error: error as any,
+      });
+    }
+  }
+
+  static async getAllOrderItems(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
+    try {
+      const filters = req.query;
+      const response = await OrderItemsService.findAll();
+
+      if (!response.success) {
+        throw response.error;
+      }
+
+      ApiResponse.success(res, response);
+    } catch (error) {
+      console.log('🐧🐧🐧🐧 : ', error);
       ApiResponse.error(res, {
         success: false,
         error: error as any,

@@ -19,7 +19,19 @@ router.get(
   OrderItemController.getUsersAllOrders,
 );
 
-router.get('/:id', authorizeRequest, OrderItemController.getOrdersItemsId);
+// TODO: A tester et regler
+// router.get(
+//   'all',
+//   authorizeRequest,
+//   adminAuthentication,
+//   OrderItemController.getUsersAllOrders,
+// );
+
+router.get(
+  '/:orderId/:orderItemId',
+  authorizeRequest,
+  OrderItemController.getOrdersItemsId,
+);
 
 router.put(
   '/update/:orderItemId',
