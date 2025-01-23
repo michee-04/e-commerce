@@ -1,10 +1,12 @@
 import {
+  AddresseRoutes,
   adminRoutes,
   categoryRoutes,
   CouponsRoute,
   FileRoutes,
   googleRoutes,
   InventoryRoute,
+  NotificationRoute,
   OrderItemsRoutes,
   OrdersRoutes,
   ProductAttributeRoute,
@@ -49,5 +51,7 @@ export class RouterModule {
     RouterModule.router.use('/coupons', CouponsRoute);
     RouterModule.router.use('/promotion', PromotionRoute);
     RouterModule.router.use('/image', ProductImageRoute);
+    RouterModule.router.use('/addresse', AddresseRoutes);
+    RouterModule.router.use('/notify', NotificationRoute);
   }
 }
