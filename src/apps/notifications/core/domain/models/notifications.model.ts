@@ -8,7 +8,7 @@ import { INotificationsModel } from '../types';
 
 const notificationSchema = createBaseSchema<INotificationsModel>(
   {
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: USER_MODEL_NAME,
       required: true,

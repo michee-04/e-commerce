@@ -2,7 +2,7 @@ import { IBaseModel } from '@nodesandbox/repo-framework';
 import { Document } from 'mongoose';
 
 export interface INotifications {
-  userId: string;
+  user: string;
   message: string;
   status: boolean;
 }
