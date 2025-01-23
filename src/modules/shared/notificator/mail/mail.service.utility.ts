@@ -52,6 +52,27 @@ class MailServiceUtilities {
       templateData,
     });
   }
+
+  static async sendNotification({
+    to,
+    firstname,
+    message,
+  }: {
+    to: string;
+    firstname: string;
+    message: string;
+  }): Promise<SuccessResponseType<void> | ErrorResponseType> {
+    const subject = 'Welcome to Our Service';
+    const htmlTemplate = 'notification';
+    const templateData = { firstname, message };
+
+    return await MailService.sendMailNotification({
+      to,
+      subject,
+      htmlTemplate,
+      templateData,
+    });
+  }
 }
 
 export default MailServiceUtilities;
