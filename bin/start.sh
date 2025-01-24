@@ -10,10 +10,10 @@ fi
 
 echo "🔄 Checking for Docker installation..."
 
-# if ! command -v docker &> /dev/null; then
-#     echo "❌ Docker could not be found. Please install Docker and try again."
-#     exit 1
-# fi
+if ! command -v docker &> /dev/null; then
+    echo "❌ Docker could not be found. Please install Docker and try again."
+    exit 1
+fi
 
 echo "✅ Docker is installed."
 
