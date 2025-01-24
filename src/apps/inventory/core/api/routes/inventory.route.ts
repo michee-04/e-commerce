@@ -29,14 +29,14 @@ router.get(
 );
 
 router.put(
-  '/',
+  '/:id',
   authorizeRequest,
   adminAuthentication,
   InventoryController.updateInventory,
 );
 
 router.delete(
-  '/',
+  '/:id',
   authorizeRequest,
   adminAuthentication,
   InventoryController.deleteInventory,

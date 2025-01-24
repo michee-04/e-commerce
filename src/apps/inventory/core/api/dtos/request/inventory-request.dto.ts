@@ -5,3 +5,9 @@ export const InventoryRequestDto: ObjectSchema = Joi.object({
   reorderLevel: Joi.number().min(10),
   lastRestockDate: Joi.date().required(),
 });
+
+export const UpdateInventoryRequestDto: ObjectSchema = Joi.object({
+  qteStock: Joi.number().optional(),
+  reorderLevel: Joi.number().min(10),
+  lastRestockDate: Joi.date().optional(),
+});

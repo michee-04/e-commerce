@@ -2,7 +2,7 @@ import { ApiResponse } from '@nodesandbox/response-kit';
 import { Request, Response } from 'express';
 import { sanitize } from 'helpers';
 import { InventoryService } from '../../business';
-import { InventoryRequestDto } from '../dtos';
+import { InventoryRequestDto, UpdateInventoryRequestDto } from '../dtos';
 
 export class InventoryController {
   static async createInventory(req: Request, res: Response) {
@@ -46,8 +46,6 @@ export class InventoryController {
 
       ApiResponse.success(res, response);
     } catch (error) {
-      console.log('🌹🌹🌹🌹🌹 ; ', error);
-
       ApiResponse.error(res, {
         success: false,
         error: error as any,
@@ -77,7 +75,7 @@ export class InventoryController {
   static async updateInventory(req: Request, res: Response) {
     try {
       const inventoryId = req.params.id;
-      const _payload = sanitize(req.body, InventoryRequestDto);
+      const _payload = sanitize(req.body, UpdateInventoryRequestDto);
 
       if (!_payload.success) {
         throw _payload.error;
