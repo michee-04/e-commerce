@@ -18,6 +18,8 @@ process.on('uncaughtException', function (err) {
 
 async function startServer() {
   try {
+    console.log('🌹🌹🌹🌹🌹 port : ', CONFIG.port);
+
     await initServices();
     global.APP = WebServer.app;
     APP.listen(CONFIG.port, () => {
