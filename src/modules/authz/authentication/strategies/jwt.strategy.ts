@@ -7,8 +7,8 @@ class JwtStrategy {
   private static instance: JwtStrategy;
   private accessTokenSecret: string;
   private refreshTokenSecret: string;
-  private accessTokenExpireTime: string;
-  private refreshTokenExpireTime: string;
+  private accessTokenExpireTime?: string | number;
+  private refreshTokenExpireTime?: string | number;
   private tokenIssuer: string;
   private redisTokenExpireTime: number;
   private redisBlacklistExpireTime: number;
