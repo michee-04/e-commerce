@@ -22,15 +22,15 @@ echo "🔄 Checking for Docker installation..."
 # if command -v docker-compose &> /dev/null; then
 #     DOCKER_COMPOSE_CMD="docker-compose"
 #     echo "✅ Docker Compose (standalone) is installed."
-# elif docker compose version &> /dev/null; then
-#     DOCKER_COMPOSE_CMD="docker compose"
-#     echo "✅ Docker Compose (plugin) is installed."
-# else
-#     echo "❌ Docker Compose could not be found. Please install Docker Compose and try again."
-#     exit 1
-# fi
+if docker compose version &> /dev/null; then
+    DOCKER_COMPOSE_CMD="docker compose"
+    echo "✅ Docker Compose (plugin) is installed."
+else
+    echo "❌ Docker Compose could not be found. Please install Docker Compose and try again."
+    exit 1
+fi
 
-DOCKER_COMPOSE_CMD="docker-compose"
+# DOCKER_COMPOSE_CMD="docker-compose"
 
 
 echo "🔄 Running install.sh..."
