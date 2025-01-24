@@ -7,19 +7,24 @@ import { AddresseController } from '../controllers';
 
 const router = Router();
 
-router.post('/', AddresseController.createAddresse);
+router.post('/:userId', AddresseController.createAddresse);
 
-router.get('/:userId', AddresseController.getAddresseUser);
+router.get('/', authorizeRequest, AddresseController.getAddresseUser);
 
 router.get(
   '/all',
   authorizeRequest,
   adminAuthentication,
-  AddresseController.createAddresse,
+  AddresseController.getAllAddresse,
 );
 
-router.put('/:addresseId', AddresseController.updateAddresse);
+router.put('/:id', authorizeRequest, AddresseController.updateAddresse);
 
-router.delete('/:addresseId', AddresseController.deleteAddresse);
+router.delete(
+  '/:id',
+  authorizeRequest,
+  adminAuthentication,
+  AddresseController.deleteAddresse,
+);
 
 export default router;

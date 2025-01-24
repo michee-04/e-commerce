@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ApiResponse } from '@nodesandbox/response-kit';
 import { NextFunction, Request, Response } from 'express';
@@ -8,8 +9,8 @@ import { ReviewsRequestDto } from '../dtos';
 export class ReviewsController {
   static async createReviews(req: Request, res: Response) {
     try {
-      //
-      const user = req.params.userId;
+      // @ts-ignore: Suppress TS error for non-existent property
+      const user = req.payload.aud;
       const product = req.params.productId;
       const _payload = sanitize(req.body, ReviewsRequestDto);
 
@@ -75,17 +76,14 @@ export class ReviewsController {
 
   static async updateReviews(req: Request, res: Response) {
     try {
-      const categoryId = req.params.id;
+      const reviewId = req.params.id;
       const _payload = sanitize(req.body, ReviewsRequestDto);
 
       if (!_payload.success) {
         throw _payload.error;
       }
 
-      const response = await ReviewsService.updateById(
-        categoryId,
-        _payload.data,
-      );
+      const response = await ReviewsService.updateById(reviewId, _payload.data);
 
       if (!response.success) {
         throw response.error;

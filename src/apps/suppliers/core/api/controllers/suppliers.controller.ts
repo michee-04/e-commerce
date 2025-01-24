@@ -7,7 +7,6 @@ import { SuppliersRequestDto, updateSuppliersRequestDto } from '../dtos';
 export class SuppliersController {
   static async createSuppliers(req: Request, res: Response) {
     try {
-      //   const user = req.params.userId;
       const payload = sanitize(req.body, SuppliersRequestDto);
       if (!payload.success) {
         throw payload.error;

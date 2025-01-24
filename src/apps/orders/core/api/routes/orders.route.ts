@@ -7,12 +7,12 @@ import { OrdersController } from '../controllers';
 
 const router = Router();
 
-router.post('/:userId', authorizeRequest, OrdersController.createOrders);
+router.post('/', authorizeRequest, OrdersController.createOrders);
 
-router.get('/:userId', authorizeRequest, OrdersController.getOrdersByUser);
+router.get('/', authorizeRequest, OrdersController.getOrdersByUser);
 
 router.get(
-  '/:userId/:orderId',
+  '/:orderId',
   authorizeRequest,
   OrdersController.getOrdersByUserByOrdersId,
 );
@@ -24,16 +24,8 @@ router.get(
   OrdersController.getAllOrders,
 );
 
-router.put(
-  '/update/:userId/:orderId',
-  authorizeRequest,
-  OrdersController.updateOrders,
-);
+router.put('/update/:orderId', authorizeRequest, OrdersController.updateOrders);
 
-router.delete(
-  '/delete/:userId/:orderId',
-  authorizeRequest,
-  OrdersController.deleteOrder,
-);
+router.delete('/:orderId', authorizeRequest, OrdersController.deleteOrder);
 
 export default router;

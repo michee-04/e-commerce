@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ApiResponse } from '@nodesandbox/response-kit';
 import { Request, Response } from 'express';
 import { sanitize } from 'helpers';
@@ -21,18 +22,19 @@ export class AddresseController {
       }
 
       ApiResponse.success(res, response, 201);
-    } catch (errpr) {
+    } catch (error) {
       ApiResponse.error(res, {
         success: false,
-        error: errpr as any,
+        error: error as any,
       });
     }
   }
 
   static async getAddresseUser(req: Request, res: Response) {
     try {
-      const userId = req.params.userId;
-      const filters = { ...req.query, user: userId };
+      // @ts-ignore: Suppress TS error for non-existent property
+      const user = req.payload.aud;
+      const filters = { ...req.query, user: user };
       const response = await AddresseService.getAddresse(filters);
       if (!response.success) {
         throw response.error;

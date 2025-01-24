@@ -15,7 +15,7 @@ class WishlistsService extends BaseService<
       },
       search: {
         enabled: true,
-        fields: ['user', 'product'],
+        fields: [],
         caseSensitive: false,
         fuzzySearch: false,
       },

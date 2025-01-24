@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ApiResponse } from '@nodesandbox/response-kit';
 import { Request, Response } from 'express';
 import { WishlistsService } from '../../business';
@@ -5,7 +6,8 @@ import { WishlistsService } from '../../business';
 export class WIshlistsController {
   static async createWishlists(req: Request, res: Response) {
     try {
-      const user = req.params.userId;
+      // @ts-ignore: Suppress TS error for non-existent property
+      const user = req.payload.aud;
       const product = req.params.productId;
 
       const payload = { user, product };
@@ -26,8 +28,9 @@ export class WIshlistsController {
 
   static async getWishlistsByUser(req: Request, res: Response) {
     try {
-      const userId = req.params.userId;
-      const filters = { ...req.query, user: userId };
+      // @ts-ignore: Suppress TS error for non-existent property
+      const user = req.payload.aud;
+      const filters = { ...req.query, user: user };
 
       const response = await WishlistsService.getWishlists(filters);
       if (!response.success) {
@@ -45,9 +48,10 @@ export class WIshlistsController {
 
   static async getWishlistsByUserIdByProductId(req: Request, res: Response) {
     try {
-      const userId = req.params.userId;
+      // @ts-ignore: Suppress TS error for non-existent property
+      const user = req.payload.aud;
       const productId = req.params.productId;
-      const filters = { ...req.query, user: userId, product: productId };
+      const filters = { ...req.query, user: user, product: productId };
 
       const response = await WishlistsService.getWishlists(filters);
 

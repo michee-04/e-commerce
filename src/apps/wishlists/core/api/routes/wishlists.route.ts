@@ -8,19 +8,15 @@ import { WIshlistsController } from '../controllers';
 const router = Router();
 
 router.post(
-  '/:userId/:productId',
+  '/:productId',
   authorizeRequest,
   WIshlistsController.createWishlists,
 );
 
-router.get(
-  '/:userId',
-  authorizeRequest,
-  WIshlistsController.getWishlistsByUser,
-);
+router.get('', authorizeRequest, WIshlistsController.getWishlistsByUser);
 
 router.get(
-  '/:userId/:productId',
+  '/:productId',
   authorizeRequest,
   WIshlistsController.getWishlistsByUserIdByProductId,
 );

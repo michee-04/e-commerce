@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ApiResponse } from '@nodesandbox/response-kit';
 import { NextFunction, Request, Response } from 'express';
@@ -9,8 +10,9 @@ import { createOrdersRequestDto, updateOrdersRequestDto } from '../dtos';
 export class OrdersController {
   static async createOrders(req: Request, res: Response, next: NextFunction) {
     try {
-      console.log('==USERID===', req.user);
-      const userId = req.params.userId;
+      // console.log('==USERID===', req.payload.aud);
+      // @ts-ignore: Suppress TS error for non-existent property
+      const userId = req.payload.aud;
       const _payload = sanitize(req.body, createOrdersRequestDto);
       if (!_payload.success) {
         throw _payload.error;
@@ -39,7 +41,8 @@ export class OrdersController {
     next: NextFunction,
   ) {
     try {
-      const userId = req.params.userId;
+      // @ts-ignore: Suppress TS error for non-existent property
+      const userId = req.payload.aud;
       const filters = { ...req.query, user: userId };
       const response = await OrdersService.getOrders(filters);
       if (!response.success) {
@@ -61,7 +64,8 @@ export class OrdersController {
     next: NextFunction,
   ) {
     try {
-      const userId = req.params.userId;
+      // @ts-ignore: Suppress TS error for non-existent property
+      const userId = req.payload.aud;
       const orderId = req.params.orderId;
       const filters = { ...req.query, user: userId, order: orderId };
 
@@ -99,8 +103,9 @@ export class OrdersController {
 
   static async updateOrders(req: Request, res: Response, next: NextFunction) {
     try {
+      // @ts-ignore: Suppress TS error for non-existent property
+      const userId = req.payload.aud;
       const orderId = req.params.orderId;
-      const userId = req.params.userId;
 
       const _payload = sanitize(req.body, updateOrdersRequestDto);
 
@@ -138,8 +143,9 @@ export class OrdersController {
 
   static async deleteOrder(req: Request, res: Response, next: NextFunction) {
     try {
+      // @ts-ignore: Suppress TS error for non-existent property
+      const userId = req.payload.aud;
       const orderId = req.params.orderId;
-      const userId = req.params.userId;
 
       const verifyOrder = await ordersService.verifyOrderOwnership(
         orderId,
