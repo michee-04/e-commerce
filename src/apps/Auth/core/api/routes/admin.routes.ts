@@ -4,6 +4,9 @@ import AdminController from '../controllers/admin.controller';
 
 const router = Router();
 
+// Route pour le tableau de bord admin
+router.get('/dashboard', adminAuthentication, AdminController.dashboard);
+
 router.post('/register', adminAuthentication, AdminController.registerAdmin);
 
 router.post(

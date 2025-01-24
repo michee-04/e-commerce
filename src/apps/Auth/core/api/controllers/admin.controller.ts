@@ -3,6 +3,7 @@ import { ApiResponse } from '@nodesandbox/repo-framework/dist/handlers';
 import { NextFunction, Request, Response } from 'express';
 import { extractResponseData, sanitize } from 'helpers';
 import { AuthService } from 'modules/authz/authentication/services';
+
 import {
   adminRequestDto,
   createGenerateLoginOtpDto,
@@ -219,6 +220,15 @@ class AdminController {
         success: false,
         error: error as any,
       });
+    }
+  }
+
+  // Méthode pour afficher le tableau de bord
+  static async dashboard(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.render('admin/dashboard/index', { title: 'Admin Dashboard' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error loading dashboard' });
     }
   }
 }
