@@ -10,25 +10,28 @@ fi
 
 echo "🔄 Checking for Docker installation..."
 
-if ! command -v docker &> /dev/null; then
-    echo "❌ Docker could not be found. Please install Docker and try again."
-    exit 1
-fi
+# if ! command -v docker &> /dev/null; then
+#     echo "❌ Docker could not be found. Please install Docker and try again."
+#     exit 1
+# fi
 
-echo "✅ Docker is installed."
+# echo "✅ Docker is installed."
 
-echo "🔄 Checking for Docker Compose installation..."
+# echo "🔄 Checking for Docker Compose installation..."
 
-if command -v docker-compose &> /dev/null; then
-    DOCKER_COMPOSE_CMD="docker-compose"
-    echo "✅ Docker Compose (standalone) is installed."
-elif docker compose version &> /dev/null; then
-    DOCKER_COMPOSE_CMD="docker compose"
-    echo "✅ Docker Compose (plugin) is installed."
-else
-    echo "❌ Docker Compose could not be found. Please install Docker Compose and try again."
-    exit 1
-fi
+# if command -v docker-compose &> /dev/null; then
+#     DOCKER_COMPOSE_CMD="docker-compose"
+#     echo "✅ Docker Compose (standalone) is installed."
+# elif docker compose version &> /dev/null; then
+#     DOCKER_COMPOSE_CMD="docker compose"
+#     echo "✅ Docker Compose (plugin) is installed."
+# else
+#     echo "❌ Docker Compose could not be found. Please install Docker Compose and try again."
+#     exit 1
+# fi
+
+DOCKER_COMPOSE_CMD="docker-compose"
+
 
 echo "🔄 Running install.sh..."
 bash "$PROJECT_ROOT/bin/install.sh"
