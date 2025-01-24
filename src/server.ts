@@ -8,7 +8,6 @@ import { GlobalInitializer } from 'helpers/config/init-globals';
 GlobalInitializer.init();
 
 // Import other modules
-import { ConfigService } from 'core/config';
 import { WebServer } from 'core/framework';
 import { initServices } from 'helpers';
 
@@ -21,7 +20,7 @@ async function startServer() {
   try {
     await initServices();
     global.APP = WebServer.app;
-    APP.listen(ConfigService.getInstance().getConfig().port, '0.0.0.0', () => {
+    APP.listen(CONFIG.port, () => {
       LOGGER.info(`Server running on port ${CONFIG.port}`);
     });
   } catch (error) {
