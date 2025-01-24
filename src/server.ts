@@ -20,7 +20,7 @@ async function startServer() {
   try {
     await initServices();
     global.APP = WebServer.app;
-    APP.listen(CONFIG.port, () => {
+    APP.listen(CONFIG.port, '0.0.0.0', () => {
       LOGGER.info(`Server running on port ${CONFIG.port}`);
     });
   } catch (error) {
