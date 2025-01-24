@@ -8,7 +8,7 @@ import { InventoryController } from '../controllers';
 const router = Router();
 
 router.post(
-  '/',
+  '/:productId/:supplierId',
   authorizeRequest,
   adminAuthentication,
   InventoryController.createInventory,

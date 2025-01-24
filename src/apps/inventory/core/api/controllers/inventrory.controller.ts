@@ -7,8 +7,8 @@ import { InventoryRequestDto } from '../dtos';
 export class InventoryController {
   static async createInventory(req: Request, res: Response) {
     try {
-      const supplier = req.params.supplierId;
       const product = req.params.productId;
+      const supplier = req.params.supplierId;
 
       const payload = sanitize(req.body, InventoryRequestDto);
       if (!payload.success) {
@@ -46,6 +46,8 @@ export class InventoryController {
 
       ApiResponse.success(res, response);
     } catch (error) {
+      console.log('🌹🌹🌹🌹🌹 ; ', error);
+
       ApiResponse.error(res, {
         success: false,
         error: error as any,

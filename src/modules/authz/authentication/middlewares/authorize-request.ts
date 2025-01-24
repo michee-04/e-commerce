@@ -17,6 +17,7 @@ export const authorizeRequest = (
 
     if (payload && typeof payload.aud === 'string') {
       const userId = payload.aud;
+      console.log('userrr is ! ===', userId);
       ASYNC_STORAGE.run(() => {
         ASYNC_STORAGE.set('currentUserId', userId);
         next();

@@ -9,6 +9,7 @@ import { createOrdersRequestDto, updateOrdersRequestDto } from '../dtos';
 export class OrdersController {
   static async createOrders(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log('==USERID===', req.user);
       const userId = req.params.userId;
       const _payload = sanitize(req.body, createOrdersRequestDto);
       if (!_payload.success) {

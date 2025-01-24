@@ -30,7 +30,6 @@ class CategoryService extends BaseService<ICategoryModel, CategoryRepository> {
   ): Promise<SuccessResponseType<null> | ErrorResponseType> {
     try {
       const { name } = payload;
-
       const categoryExists = await this.repository.exists({ name: name });
 
       if (categoryExists === true) {
@@ -40,7 +39,6 @@ class CategoryService extends BaseService<ICategoryModel, CategoryRepository> {
           statusCode: 409,
         });
       }
-
       const categoryResponse = await this.repository.create(payload);
 
       return {

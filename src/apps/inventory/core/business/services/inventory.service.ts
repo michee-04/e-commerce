@@ -10,12 +10,12 @@ class InventoryService extends BaseService<
     const inventoryRepo = new InventoryRepository(inventoryModel);
     super(inventoryRepo, {
       filter: {
-        allowedFields: ['product', 'qteStock', 'supplier'],
+        allowedFields: ['product', 'qteStock', 'supplier', 'lastRestockDate'],
         defaultSort: { createdAt: -1 },
       },
       search: {
         enabled: true,
-        fields: ['qteStock', 'reorderLevel', 'supplier', 'lastRestockDate'],
+        fields: ['product.name'],
         caseSensitive: false,
         fuzzySearch: false,
       },
